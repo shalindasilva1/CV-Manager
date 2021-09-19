@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using CV_Manager.Data;
 
 namespace CV_Manager
 {
@@ -32,6 +34,9 @@ namespace CV_Manager
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CV_Manager", Version = "v1" });
             });
+
+            services.AddDbContext<CV_ManagerContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CV_ManagerContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
