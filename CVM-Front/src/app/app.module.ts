@@ -16,9 +16,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
-import { HomeComponent } from './home/home.component';
-import { JobsComponent } from './jobs/jobs.component';
-import { ResumesComponent } from './resumes/resumes.component';
+import { HomeComponent } from './components/home/home.component';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { ResumesComponent } from './components/resumes/resumes.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -50,7 +50,12 @@ const materialModules = [
     }),
     BrowserAnimationsModule,
     LayoutModule,
-    materialModules
+    materialModules,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
