@@ -20,6 +20,10 @@ import { HomeComponent } from './components/home/home.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { ResumesComponent } from './components/resumes/resumes.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { JobCountsComponent } from './components/home/cards/job-counts/job-counts.component';
+import { MonthlyPerformanceComponent } from './components/home/cards/monthly-performance/monthly-performance.component';
+import { OngoingJobsComponent } from './components/home/cards/ongoing-jobs/ongoing-jobs.component';
+import { SkillCountsComponent } from './components/home/cards/skill-counts/skill-counts.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -38,6 +42,10 @@ const materialModules = [
     AppComponent,
     MainNavComponent,
       HomeComponent,
+        JobCountsComponent,
+        MonthlyPerformanceComponent,
+        OngoingJobsComponent,
+        SkillCountsComponent,
       JobsComponent,
       ResumesComponent
    ],

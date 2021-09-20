@@ -9,6 +9,7 @@ import { CardTypes } from '../../shared/CardTypes.enum';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  cardTypes = CardTypes;
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {

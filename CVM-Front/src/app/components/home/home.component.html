@@ -10,7 +10,10 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+          <app-ongoing-jobs *ngIf="card.type == cardTypes.OngoingJobs"></app-ongoing-jobs>
+          <app-skill-counts *ngIf="card.type == cardTypes.SkillCounts"></app-skill-counts>
+          <app-monthly-performance *ngIf="card.type == cardTypes.MonthlyPerformance"></app-monthly-performance>
+          <app-job-counts *ngIf="card.type == cardTypes.JobCounts"></app-job-counts>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
