@@ -16,12 +16,29 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from './home/home.component';
+import { JobsComponent } from './jobs/jobs.component';
+import { ResumesComponent } from './resumes/resumes.component';
+
+const materialModules = [
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule
+];
 
 @NgModule({
-  declarations: [
+  declarations: [			
     AppComponent,
-    MainNavComponent
-  ],
+    MainNavComponent,
+      HomeComponent,
+      JobsComponent,
+      ResumesComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,14 +50,7 @@ import { MatMenuModule } from '@angular/material/menu';
     }),
     BrowserAnimationsModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule
+    materialModules
   ],
   providers: [],
   bootstrap: [AppComponent]
