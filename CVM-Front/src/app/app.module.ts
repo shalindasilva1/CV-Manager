@@ -19,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './components/home/home.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { ResumesComponent } from './components/resumes/resumes.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const materialModules = [
   MatToolbarModule,
@@ -28,7 +29,8 @@ const materialModules = [
   MatListModule,
   MatGridListModule,
   MatCardModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTooltipModule
 ];
 
 @NgModule({
