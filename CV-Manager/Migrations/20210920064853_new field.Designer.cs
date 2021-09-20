@@ -4,14 +4,16 @@ using CV_Manager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CV_Manager.Migrations
 {
     [DbContext(typeof(CV_ManagerContext))]
-    partial class CV_ManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20210920064853_new field")]
+    partial class newfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
