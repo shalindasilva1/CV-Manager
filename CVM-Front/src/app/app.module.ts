@@ -24,6 +24,7 @@ import { JobCountsComponent } from './components/home/cards/job-counts/job-count
 import { MonthlyPerformanceComponent } from './components/home/cards/monthly-performance/monthly-performance.component';
 import { OngoingJobsComponent } from './components/home/cards/ongoing-jobs/ongoing-jobs.component';
 import { SkillCountsComponent } from './components/home/cards/skill-counts/skill-counts.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 const materialModules = [
   MatToolbarModule,
@@ -34,7 +35,7 @@ const materialModules = [
   MatGridListModule,
   MatCardModule,
   MatMenuModule,
-  MatTooltipModule
+  MatTooltipModule,
 ];
 
 @NgModule({
@@ -51,8 +52,9 @@ const materialModules = [
    ],
   imports: [
     BrowserModule,
+    AgGridModule.withComponents([]),
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('news-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
@@ -61,11 +63,6 @@ const materialModules = [
     BrowserAnimationsModule,
     LayoutModule,
     materialModules,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
