@@ -37,11 +37,12 @@ namespace CV_Manager
                         Configuration.GetConnectionString("CV_ManagerContext"),
                         b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             #region Repositories
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             // Add extended repositories when its available
-            services.AddTransient<IJobsRepository, JobsRepository>();
-            services.AddTransient<IResumesRepository, ResumesRepository>();
+            services.AddScoped<IJobsRepository, JobsRepository>();
+            services.AddScoped<IResumesRepository, ResumesRepository>();
             #endregion
 
         }

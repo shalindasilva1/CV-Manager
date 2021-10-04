@@ -21,86 +21,110 @@ namespace CV_Manager.Controllers
 
         // GET: api/Jobs
         [HttpGet]
-        public  IEnumerable<Jobs> GetJobs()
+        public async Task<ActionResult<List<Jobs>>> GetJobs()
         {
-            return  _unitOfWork.Jobs.GetAll();
+            try
+            {
+                var result = await _unitOfWork.Jobs.GetAllAsync();
+                return Ok(result.ToList());
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
-        //// GET: api/Jobs/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Jobs>> GetJobs(long id)
-        //{
-        //    var jobs = await _context.Jobs.FindAsync(id);
+        // GET: api/Jobs/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Jobs>> GetJobs(long id)
+        {
+            try
+            {
+                var result = await _unitOfWork.Jobs.GetByIdAsync(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
-        //    if (jobs == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // PUT: api/Jobs/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutJobs(long id, Jobs jobs)
+        {
+            if (id != jobs.Id)
+            {
+                return BadRequest();
+            }
 
-        //    return jobs;
-        //}
+            try
+            {
+                await _unitOfWork.Jobs.UpdateAsync(jobs);
+            }
+            catch (System.Exception ex)
+            {
+                if (await JobsExists(id) > 0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return BadRequest(ex);
+                }
+            }
 
-        //// PUT: api/Jobs/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutJobs(long id, Jobs jobs)
-        //{
-        //    if (id != jobs.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+            return Ok(jobs);
+        }
 
-        //    _context.Entry(jobs).State = EntityState.Modified;
+        // POST: api/Jobs
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Jobs>> PostJobs(Jobs jobs)
+        {
+            try
+            {
+                await _unitOfWork.Jobs.AddAsync(jobs);
+                return CreatedAtAction("GetJobs", new { id = jobs.Id }, jobs);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex);
+            }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!JobsExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            
+        }
 
-        //    return NoContent();
-        //}
+        // DELETE: api/Jobs/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteJobs(long id)
+        {
+            var jobs = await _unitOfWork.Jobs.GetByIdAsync(id);
+            if (jobs == null)
+            {
+                return NotFound();
+            }
 
-        //// POST: api/Jobs
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Jobs>> PostJobs(Jobs jobs)
-        //{
-        //    _context.Jobs.Add(jobs);
-        //    await _context.SaveChangesAsync();
+            try
+            {
+                await _unitOfWork.Jobs.RemoveAsync(jobs);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex);
+            }
 
-        //    return CreatedAtAction("GetJobs", new { id = jobs.Id }, jobs);
-        //}
+            return Ok(jobs);
+        }
 
-        //// DELETE: api/Jobs/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteJobs(long id)
-        //{
-        //    var jobs = await _context.Jobs.FindAsync(id);
-        //    if (jobs == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Jobs.Remove(jobs);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool JobsExists(long id)
-        //{
-        //    return _context.Jobs.Any(e => e.Id == id);
-        //}
+        private async Task<int> JobsExists(long id)
+        {
+            return await _unitOfWork.Jobs.CountWhereAsync(x => x.Id == id);
+        }
     }
 }

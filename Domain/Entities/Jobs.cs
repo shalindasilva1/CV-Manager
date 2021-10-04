@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Entities;
+using System.Collections.Generic;
 
 namespace CV_Manager.Models
 {
-    public class Jobs
+    public class Jobs : BaseEntity
     {
-        public long Id { get; set; }
         public string Name { get; set; }
         public Status Status { get; set; }
         public int YearsOfExperience { get; set; }

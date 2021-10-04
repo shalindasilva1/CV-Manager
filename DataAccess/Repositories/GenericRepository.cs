@@ -1,46 +1,63 @@
-﻿using DataAccess;
-using Domain.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using DataAccess;
+using Domain.Entities;
+using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         protected readonly ApplicationContext _context;
         public GenericRepository(ApplicationContext context)
         {
             _context = context;
         }
-        public void Add(T entity)
+
+        #region Public Methods
+
+        public ValueTask<T> GetByIdAsync(long id) => _context.Set<T>().FindAsync(id);
+
+        public Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+            => _context.Set<T>().FirstOrDefaultAsync(predicate);
+
+        public async Task AddAsync(T entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
-        public void AddRange(IEnumerable<T> entities)
+
+        public Task UpdateAsync(T entity)
         {
-            _context.Set<T>().AddRange(entities);
+            _context.Entry(entity).State = EntityState.Modified;
+            return _context.SaveChangesAsync();
         }
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
-        {
-            return _context.Set<T>().Where(expression);
-        }
-        public IEnumerable<T> GetAll()
-        {
-            return _context.Set<T>().ToList();
-        }
-        public T GetById(int id)
-        {
-            return _context.Set<T>().Find(id);
-        }
-        public void Remove(T entity)
+
+        public Task RemoveAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
+            return _context.SaveChangesAsync();
         }
-        public void RemoveRange(IEnumerable<T> entities)
+
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            _context.Set<T>().RemoveRange(entities);
+            return await _context.Set<T>().ToListAsync();
         }
+
+        public async Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public Task<int> CountAllAsync() => _context.Set<T>().CountAsync();
+
+        public Task<int> CountWhereAsync(Expression<Func<T, bool>> predicate)
+            => _context.Set<T>().CountAsync(predicate);
+
+        #endregion
     }
 }

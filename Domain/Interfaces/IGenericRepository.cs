@@ -1,17 +1,25 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : BaseEntity
     {
-        T GetById(int id);
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> expression);
-        void Add(T entity);
-        void AddRange(IEnumerable<T> entities);
-        void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);
+        ValueTask<T> GetByIdAsync(long id);
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task RemoveAsync(T id);
+
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate);
+
+        Task<int> CountAllAsync();
+        Task<int> CountWhereAsync(Expression<Func<T, bool>> predicate);
     }
 }
