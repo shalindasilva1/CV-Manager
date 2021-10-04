@@ -11,9 +11,13 @@ namespace DataAccess
 
         public DbSet<Resumes> Resumes { get; set; }
 
+        public DbSet<Jobs> Jobs { get; set; }
+        
         public DbSet<Companies> Companies { get; set; }
 
-        public DbSet<Jobs> Jobs { get; set; }
+        public DbSet<Contacts> Contacts { get; set; }
+
+        public DbSet<Designations> Designations { get; set; }
 
         public DbSet<Skills> Skills { get; set; }
 

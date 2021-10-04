@@ -36,6 +36,7 @@ namespace CV_Manager
                     options.UseSqlServer(
                         Configuration.GetConnectionString("CV_ManagerContext"),
                         b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             #region Repositories
