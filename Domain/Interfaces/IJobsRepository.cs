@@ -9,5 +9,6 @@ namespace Domain.Interfaces
 {
     public interface IJobsRepository : IGenericRepository<Jobs>
     {
+        Task<Jobs> GetByIdIncludedAsync(long id);
     }
 }

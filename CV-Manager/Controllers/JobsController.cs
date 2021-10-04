@@ -1,5 +1,6 @@
 ﻿using CV_Manager.Models;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace CV_Manager.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("_CVMCROSPolicy")]
     [ApiController]
     public class JobsController : ControllerBase
     {
@@ -40,7 +42,7 @@ namespace CV_Manager.Controllers
         {
             try
             {
-                var result = await _unitOfWork.Jobs.GetByIdAsync(id);
+                var result = await _unitOfWork.Jobs.GetByIdIncludedAsync(id);
                 if (result == null)
                 {
                     return NotFound();

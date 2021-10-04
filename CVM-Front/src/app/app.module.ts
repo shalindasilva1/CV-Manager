@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -25,6 +24,8 @@ import { MonthlyPerformanceComponent } from './components/home/cards/monthly-per
 import { OngoingJobsComponent } from './components/home/cards/ongoing-jobs/ongoing-jobs.component';
 import { SkillCountsComponent } from './components/home/cards/skill-counts/skill-counts.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { HttpClientModule } from '@angular/common/http';
+import { API_BASE_URL } from './Services/NSWAG';
 
 const materialModules = [
   MatToolbarModule,
@@ -62,9 +63,15 @@ const materialModules = [
     }),
     BrowserAnimationsModule,
     LayoutModule,
+    HttpClientModule,
     materialModules,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: API_BASE_URL,
+      useValue: environment.apiRoot
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
