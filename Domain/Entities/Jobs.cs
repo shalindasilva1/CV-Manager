@@ -8,8 +8,10 @@ namespace CV_Manager.Models
         public string Name { get; set; }
         public Status Status { get; set; }
         public int YearsOfExperience { get; set; }
-        public List<Skills> TechStack { get; set; }
-        public Companies Company { get; set; }
+
+        public long CompanyId { get; set; }
+        public virtual Companies Company { get; set; }
+        public virtual ICollection<Skills> TechStack { get; set; }
     }
 
     public enum Status

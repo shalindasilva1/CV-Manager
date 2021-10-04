@@ -44,6 +44,12 @@ namespace CV_Manager
             // Add extended repositories when its available
             services.AddScoped<IJobsRepository, JobsRepository>();
             services.AddScoped<IResumesRepository, ResumesRepository>();
+            services.AddScoped<ICompaniesRepository, CompaniesRepository>();
+            services.AddScoped<IContactsRepository, ContactsRepository>();
+            services.AddScoped<IDesignationsRepository, DesignationsRepository>();
+            services.AddScoped<ISkillsRepository, SkillsRepository>();
+
+
             #endregion
 
         }

@@ -16,11 +16,18 @@ namespace DataAccess.UnitOfWork
             _context = context;
             Jobs = new JobsRepository(_context);
             Resumes = new ResumesRepository(_context);
-
+            Companies = new CompaniesRepository(_context);
+            Contacts = new ContactsRepository(_context);
+            Designations = new DesignationsRepository(_context);
+            Skills = new SkillsRepository(_context);
         }
 
         public IJobsRepository Jobs { get; private set; }
         public IResumesRepository Resumes { get; private set; }
+        public ICompaniesRepository Companies { get; private set; }
+        public IContactsRepository Contacts { get; private set; }
+        public IDesignationsRepository Designations { get; private set; }
+        public ISkillsRepository Skills { get; private set; }
 
         public int Complete()
         {
