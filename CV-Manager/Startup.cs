@@ -1,18 +1,15 @@
+using DataAccess;
+using DataAccess.Repositories;
+using DataAccess.UnitOfWork;
+using Domain.Interfaces;
+using Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using CV_Manager.Data;
 
 namespace CV_Manager
 {
@@ -35,8 +32,18 @@ namespace CV_Manager
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CV_Manager", Version = "v1" });
             });
 
-            services.AddDbContext<CV_ManagerContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("CV_ManagerContext")));
+            services.AddDbContext<ApplicationContext>(options =>
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("CV_ManagerContext"),
+                        b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            #region Repositories
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // Add extended repositories when its available
+            services.AddTransient<IJobsRepository, JobsRepository>();
+            services.AddTransient<IResumesRepository, ResumesRepository>();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

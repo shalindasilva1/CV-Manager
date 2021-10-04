@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CV_Manager.Models
 {
@@ -17,8 +14,8 @@ namespace CV_Manager.Models
 
     public enum Status
     {
-        Todo=1,
-        OnGoing=2,
-        Done=3
+        Todo = 1,
+        OnGoing = 2,
+        Done = 3
     }
 }
