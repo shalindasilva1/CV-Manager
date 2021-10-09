@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Client,Jobs } from '../../Services/NSWAG';
 
 @Component({
@@ -9,7 +10,8 @@ import { Client,Jobs } from '../../Services/NSWAG';
 })
 export class JobsComponent implements OnInit {
 
-  rowData: Jobs[] = [];
+  public dataSource: MatTableDataSource<Jobs> = new MatTableDataSource<Jobs>();
+  displayedColumns: string[] = ['id', 'name', 'yearsOfExperience', 'status'];
   constructor(private readonly _client: Client) { }
 
   ngOnInit() {
@@ -18,7 +20,12 @@ export class JobsComponent implements OnInit {
 
   getAllJobs(){
     this._client.jobsAll().subscribe(jobs =>
-      this.rowData = jobs
+      this.dataSource = new MatTableDataSource<Jobs>(jobs)
     );
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

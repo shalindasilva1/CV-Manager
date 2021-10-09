@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +26,8 @@ import { OngoingJobsComponent } from './components/home/cards/ongoing-jobs/ongoi
 import { SkillCountsComponent } from './components/home/cards/skill-counts/skill-counts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './Services/NSWAG';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const materialModules = [
   MatToolbarModule,
@@ -36,6 +39,9 @@ const materialModules = [
   MatCardModule,
   MatMenuModule,
   MatTooltipModule,
+  MatTableModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 @NgModule({
