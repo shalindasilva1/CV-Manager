@@ -730,7 +730,7 @@ export class Jobs implements IJobs {
     companyId?: number;
     company?: Companies;
     techStack?: Skills[] | null;
-
+    expanded: Boolean = false;
     constructor(data?: IJobs) {
         if (data) {
             for (var property in data) {

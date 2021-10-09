@@ -1,6 +1,11 @@
 .grid-container {
   margin: 20px;
 }
+
+mat-card {
+  margin: 10px;
+}
+
 table {
   width: 100%;
 }
@@ -8,4 +13,22 @@ table {
 .mat-form-field {
   font-size: 14px;
   width: 30%;
+}
+
+.detail-row {
+  height: 0;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.detail-table {
+  background: #b7b7b773;
+  text-align: center;
 }

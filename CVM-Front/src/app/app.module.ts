@@ -28,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './Services/NSWAG';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatChipsModule } from '@angular/material/chips';
 
 const materialModules = [
   MatToolbarModule,
@@ -42,6 +44,7 @@ const materialModules = [
   MatTableModule,
   MatFormFieldModule,
   MatInputModule,
+  MatChipsModule
 ];
 
 @NgModule({
@@ -68,6 +71,7 @@ const materialModules = [
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
+    FlexLayoutModule,
     materialModules,
   ],
   providers: [
