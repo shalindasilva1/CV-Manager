@@ -23,7 +23,6 @@ import { JobCountsComponent } from './components/home/cards/job-counts/job-count
 import { MonthlyPerformanceComponent } from './components/home/cards/monthly-performance/monthly-performance.component';
 import { OngoingJobsComponent } from './components/home/cards/ongoing-jobs/ongoing-jobs.component';
 import { SkillCountsComponent } from './components/home/cards/skill-counts/skill-counts.component';
-import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './Services/NSWAG';
 
@@ -40,20 +39,19 @@ const materialModules = [
 ];
 
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent,
     MainNavComponent,
-      HomeComponent,
-        JobCountsComponent,
-        MonthlyPerformanceComponent,
-        OngoingJobsComponent,
-        SkillCountsComponent,
-      JobsComponent,
-      ResumesComponent
-   ],
+    HomeComponent,
+    JobCountsComponent,
+    MonthlyPerformanceComponent,
+    OngoingJobsComponent,
+    SkillCountsComponent,
+    JobsComponent,
+    ResumesComponent
+  ],
   imports: [
     BrowserModule,
-    AgGridModule.withComponents([]),
     AppRoutingModule,
     ServiceWorkerModule.register('news-worker.js', {
       enabled: environment.production,
