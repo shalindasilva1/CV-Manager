@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -46,7 +47,8 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatChipsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatButtonModule
 ];
 
 @NgModule({
@@ -59,7 +61,8 @@ const materialModules = [
     OngoingJobsComponent,
     SkillCountsComponent,
     JobsComponent,
-    ResumesComponent
+    ResumesComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

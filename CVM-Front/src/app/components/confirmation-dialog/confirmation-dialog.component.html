@@ -1,6 +1,14 @@
-<h1 mat-dialog-title>{{data.header}}</h1>
+
+<div fxLayout="row">
+  <div fxLayout="column">
+    <mat-icon color="warn">error_outline</mat-icon>
+  </div>
+  <div fxLayout="column">
+    <h1 mat-dialog-title fxLayout="row">{{data.header}}</h1>
+  </div>
+</div>
 <div mat-dialog-content>{{data.body}}</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button mat-dialog-actions>Ok</button>
+  <button mat-button (click)="ok(false)">Close</button>
+  <button mat-button color="primary" (click)="ok(true)" cdkFocusInitial>Ok</button>
 </div>

@@ -5,6 +5,7 @@ import { ColumnDefinition } from 'src/app/shared/ColumnDefinition';
 import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-jobs',
@@ -66,17 +67,19 @@ export class JobsComponent implements OnInit {
       let Id = element.id;
       const dialog = this.dialog.open(ConfirmationDialogComponent, {
         width: '330px',
-        height: '400px',
+        height: 'auto',
         data: {
           header: "Delete Job",
           body: "You are about to delete this job. Are you sure?"
         }
       });
 
-      dialog.afterClosed().subscribe(() => {
-        this._client.jobsDELETE(Id).subscribe(()=>{
-          // add notification
-        });
+      dialog.afterClosed().subscribe(data => {
+        if (data) {
+          this._client.jobsDELETE(Id).subscribe(data => {
+            console.log(data);
+          });
+        }
       });
     }
   }
