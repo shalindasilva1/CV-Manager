@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColumnDefinition } from 'src/app/shared/ColumnDefinition';
 import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -28,7 +30,10 @@ export class JobsComponent implements OnInit {
   public company: Companies = new Companies();
   public techStack: Skills[] = [];
 
-  constructor(private readonly _client: Client) { }
+  constructor(
+    private readonly _client: Client,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.getAllJobs();
@@ -54,5 +59,25 @@ export class JobsComponent implements OnInit {
       });
     }
     element.expanded = !element.expanded
+  }
+
+  deleteJob(element: Jobs) {
+    if (element.id) {
+      let Id = element.id;
+      const dialog = this.dialog.open(ConfirmationDialogComponent, {
+        width: '330px',
+        height: '400px',
+        data: {
+          header: "Delete Job",
+          body: "You are about to delete this job. Are you sure?"
+        }
+      });
+
+      dialog.afterClosed().subscribe(() => {
+        this._client.jobsDELETE(Id).subscribe(()=>{
+          // add notification
+        });
+      });
+    }
   }
 }
