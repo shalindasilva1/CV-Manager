@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ColumnDefinition } from 'src/app/shared/column-definition';
 import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogIcon } from 'src/app/shared/dialog-data';
 
