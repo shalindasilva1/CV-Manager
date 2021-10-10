@@ -32,6 +32,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
+import { JobAddComponent } from './components/jobs/job-add/job-add.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -62,7 +63,8 @@ const materialModules = [
     SkillCountsComponent,
     JobsComponent,
     ResumesComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    JobAddComponent
   ],
   imports: [
     BrowserModule,

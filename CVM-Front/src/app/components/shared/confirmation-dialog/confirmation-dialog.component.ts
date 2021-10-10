@@ -13,7 +13,7 @@ export class ConfirmationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) { }
 
-    icon = DialogIcon;
+    public icon = DialogIcon;
   ngOnInit() {
   }
 

@@ -1,10 +1,12 @@
 export interface DialogData {
     header: string;
     body: string;
-    icon: DialogIcon
+    icon: DialogIcon;
+    data: any;
 }
 
 export enum DialogIcon {
+    na,
     warn
 }
 

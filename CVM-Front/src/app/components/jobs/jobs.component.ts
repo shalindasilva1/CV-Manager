@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogIcon } from 'src/app/shared/dialog-data';
+import { JobAddComponent } from './job-add/job-add.component';
 
 @Component({
   selector: 'app-jobs',
@@ -75,7 +76,6 @@ export class JobsComponent implements OnInit {
           icon: DialogIcon.warn
         }
       });
-
       dialog.afterClosed().subscribe(data => {
         if (data) {
           this._client.jobsDELETE(Id).subscribe(data => {
@@ -84,5 +84,15 @@ export class JobsComponent implements OnInit {
         }
       });
     }
+  }
+
+  openAddJobForm(element?: Jobs) {
+    const dialog = this.dialog.open(JobAddComponent, {
+      data: {
+        header: "Add Job",
+        icon: DialogIcon.na,
+        data: element
+      }
+    });
   }
 }

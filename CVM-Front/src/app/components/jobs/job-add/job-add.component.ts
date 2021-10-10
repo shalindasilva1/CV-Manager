@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogData } from 'src/app/shared/dialog-data';
 
 @Component({
   selector: 'app-job-add',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobAddComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialogRef: MatDialogRef<JobAddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
 
   ngOnInit() {
   }
