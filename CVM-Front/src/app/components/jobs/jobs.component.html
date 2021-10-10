@@ -1,9 +1,18 @@
 <div class="grid-container">
   <h1 class="mat-h1">Jobs</h1>
-  <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-  </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="column">
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Name" #input>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column">
+      <button mat-fab color="primary" matTooltip="Add Jobs">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
 
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
 
@@ -32,7 +41,7 @@
                 <mat-chip-list aria-label="Fish selection">
                   <mat-chip *ngFor="let skill of techStack" color="accent" selected>#{{skill.name}}</mat-chip>
                 </mat-chip-list>
-                <p ></p>
+                <p></p>
               </mat-card-content>
             </mat-card>
           </div>
