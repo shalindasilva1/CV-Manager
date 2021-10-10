@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ColumnDefinition } from 'src/app/shared/ColumnDefinition';
 import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
 
 @Component({
@@ -18,9 +19,15 @@ import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
 export class JobsComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Jobs> = new MatTableDataSource<Jobs>();
-  public displayedColumns: string[] = ['id', 'name', 'yearsOfExperience', 'status'];
+  public displayedColumnsObject: ColumnDefinition[] = [
+    { id: 'id', name: 'ID' },
+    { id: 'name', name: 'Name' },
+    { id: 'yearsOfExperience', name: 'Years Of Experience' },
+    { id: 'status', name: 'Status' }];
+  public displayedColumns: string[] = this.displayedColumnsObject.map(c => c.id!).concat(['action']);
   public company: Companies = new Companies();
   public techStack: Skills[] = [];
+
   constructor(private readonly _client: Client) { }
 
   ngOnInit() {
