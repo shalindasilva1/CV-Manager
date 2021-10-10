@@ -1,7 +1,7 @@
 
 <div fxLayout="row">
-  <div fxLayout="column">
-    <mat-icon color="warn">error_outline</mat-icon>
+  <div fxLayout="column" [ngSwitch]="data.icon">
+    <mat-icon color="warn" *ngSwitchCase="icon.warn">error_outline</mat-icon>
   </div>
   <div fxLayout="column">
     <h1 mat-dialog-title fxLayout="row">{{data.header}}</h1>

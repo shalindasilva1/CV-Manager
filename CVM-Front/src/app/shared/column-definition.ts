@@ -1,4 +1,4 @@
-export class ColumnDefinition {
+export interface ColumnDefinition {
     id?: string;
     name?: string;
 }

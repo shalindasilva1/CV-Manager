@@ -1,11 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ColumnDefinition } from 'src/app/shared/ColumnDefinition';
+import { ColumnDefinition } from 'src/app/shared/column-definition';
 import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { DialogIcon } from 'src/app/shared/dialog-data';
 
 @Component({
   selector: 'app-jobs',
@@ -70,7 +71,8 @@ export class JobsComponent implements OnInit {
         height: 'auto',
         data: {
           header: "Delete Job",
-          body: "You are about to delete this job. Are you sure?"
+          body: "You are about to delete this job. Are you sure?",
+          icon: DialogIcon.warn
         }
       });
 

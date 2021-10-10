@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { CardTypes } from '../../shared/CardTypes.enum';
+import { CardTypes } from '../../shared/card-types.enum';
 
 @Component({
   selector: 'app-home',
