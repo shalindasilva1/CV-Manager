@@ -11,6 +11,7 @@ namespace Domain.Interfaces
         IResumesRepository Resumes { get; }
         IJobsRepository Jobs { get; }
         ICompaniesRepository Companies { get; }
+        ISkillsRepository Skills { get; }
         int Complete();
     }
 }

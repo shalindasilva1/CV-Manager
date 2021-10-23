@@ -28,7 +28,11 @@
       <td>
         <mat-form-field appearance="outline">
           <mat-label>Company</mat-label>
-          <input matInput>
+          <mat-select>
+            <mat-option *ngFor="let company of companies" [value]="company">
+              {{company.name}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </td>
       <td colspan="2">
