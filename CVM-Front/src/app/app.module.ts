@@ -34,8 +34,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 import { JobAddComponent } from './components/jobs/job-add/job-add.component';
 import { MatSelectModule } from '@angular/material/select';
-import { CompanyAddComponent } from './components/jobs/job-add/company-add/company-add.component';
-import { TechStackAddComponent } from './components/jobs/job-add/tech-stack-add/tech-stack-add.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -68,9 +66,7 @@ const materialModules = [
     JobsComponent,
     ResumesComponent,
     ConfirmationDialogComponent,
-    JobAddComponent,
-    CompanyAddComponent,
-    TechStackAddComponent
+    JobAddComponent
   ],
   imports: [
     BrowserModule,
