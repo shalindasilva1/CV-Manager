@@ -34,6 +34,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 import { JobAddComponent } from './components/jobs/job-add/job-add.component';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const materialModules = [
   MatToolbarModule,
@@ -81,6 +82,8 @@ const materialModules = [
     LayoutModule,
     HttpClientModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     materialModules,
   ],
   providers: [

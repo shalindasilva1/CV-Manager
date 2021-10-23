@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Client, Companies, Skills, Status } from 'src/app/Services/NSWAG';
+import { Client, Companies, Jobs, Skills, Status } from 'src/app/Services/NSWAG';
 import { DialogData } from 'src/app/shared/dialog-data';
 import { FileType2LabelMapping } from 'src/app/shared/LabelMappings';
 
@@ -15,16 +16,28 @@ export class JobAddComponent implements OnInit {
   public enumKeys: string[] = [];
   public companies: Companies[] = [];
   public skills: Skills[] = [];
+  public addJobForm: any;
+
   constructor(
     private dialogRef: MatDialogRef<JobAddComponent>,
     private readonly _client: Client,
+    private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    this.addJobForm = this.formBuilder.group({
+      name: '',
+      yearsOfExperience: '',
+      status: '',
+      company: '',
+      techStack: ''
+    });
     this.enumKeys = Object.keys(this.statuses);
     this.getAllCompanies();
     this.getAllSkills();
+
   }
 
   getAllCompanies() {
@@ -36,6 +49,12 @@ export class JobAddComponent implements OnInit {
   getAllSkills() {
     this._client.skillsAll().subscribe(skills =>
       this.skills = skills
+    );
+  }
+
+  addJob() {
+    this._client.jobsPOST(new Jobs(this.addJobForm.value)).subscribe(result =>
+      console.log(result)
     );
   }
 }
