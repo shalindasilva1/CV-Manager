@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Client, Companies, Status } from 'src/app/Services/NSWAG';
+import { Client, Companies, Skills, Status } from 'src/app/Services/NSWAG';
 import { DialogData } from 'src/app/shared/dialog-data';
 import { FileType2LabelMapping } from 'src/app/shared/LabelMappings';
 
@@ -14,6 +14,7 @@ export class JobAddComponent implements OnInit {
   public FileType2LabelMapping = FileType2LabelMapping;
   public enumKeys: string[] = [];
   public companies: Companies[] = [];
+  public skills: Skills[] = [];
   constructor(
     private dialogRef: MatDialogRef<JobAddComponent>,
     private readonly _client: Client,
@@ -22,13 +23,19 @@ export class JobAddComponent implements OnInit {
 
   ngOnInit() {
     this.enumKeys = Object.keys(this.statuses);
-    this.getAllJobs();
+    this.getAllCompanies();
+    this.getAllSkills();
   }
 
-  getAllJobs() {
+  getAllCompanies() {
     this._client.companiesAll().subscribe(companies =>
       this.companies = companies
     );
   }
 
+  getAllSkills() {
+    this._client.skillsAll().subscribe(skills =>
+      this.skills = skills
+    );
+  }
 }
