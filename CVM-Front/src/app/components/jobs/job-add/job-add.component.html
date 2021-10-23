@@ -13,29 +13,37 @@
           <input matInput type="number">
         </mat-form-field>
       </td>
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let enumKey of enumKeys" [value]="enumKey">
+              {{FileType2LabelMapping[enumKey]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
     </tr>
-  </table>
-
-  <table>
     <tr>
       <td>
         <mat-form-field appearance="outline">
-          <mat-label>City</mat-label>
-          <input matInput placeholder="Ex. San Francisco">
+          <mat-label>Company</mat-label>
+          <input matInput>
         </mat-form-field>
       </td>
+      <td colspan="2">
+        <app-company-add></app-company-add>
+      </td>
+    </tr>
+    <tr>
       <td>
         <mat-form-field appearance="outline">
-          <mat-label>State</mat-label>
-          <input matInput placeholder="Ex. California">
+          <mat-label>Tech Stack</mat-label>
+          <input matInput>
         </mat-form-field>
       </td>
-      <td>
-        <mat-form-field appearance="outline">
-          <mat-label>Postal Code</mat-label>
-          <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
-          <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-        </mat-form-field>
+      <td colspan="2">
+        <app-tech-stack-add></app-tech-stack-add>
       </td>
     </tr>
   </table>

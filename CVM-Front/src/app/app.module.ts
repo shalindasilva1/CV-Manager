@@ -33,6 +33,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 import { JobAddComponent } from './components/jobs/job-add/job-add.component';
+import { MatSelectModule } from '@angular/material/select';
+import { CompanyAddComponent } from './components/jobs/job-add/company-add/company-add.component';
+import { TechStackAddComponent } from './components/jobs/job-add/tech-stack-add/tech-stack-add.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -49,7 +52,8 @@ const materialModules = [
   MatInputModule,
   MatChipsModule,
   MatDialogModule,
-  MatButtonModule
+  MatButtonModule,
+  MatSelectModule
 ];
 
 @NgModule({
@@ -64,7 +68,9 @@ const materialModules = [
     JobsComponent,
     ResumesComponent,
     ConfirmationDialogComponent,
-    JobAddComponent
+    JobAddComponent,
+    CompanyAddComponent,
+    TechStackAddComponent
   ],
   imports: [
     BrowserModule,

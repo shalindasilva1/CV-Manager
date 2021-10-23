@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { DialogIcon } from 'src/app/shared/dialog-data';
 import { JobAddComponent } from './job-add/job-add.component';
+import { FileType2LabelMapping } from 'src/app/shared/LabelMappings';
 
 @Component({
   selector: 'app-jobs',
@@ -22,10 +23,11 @@ import { JobAddComponent } from './job-add/job-add.component';
 export class JobsComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Jobs> = new MatTableDataSource<Jobs>();
-  public displayedColumns: string[] = ['id','name','yearsOfExperience','status','action'];
+  public displayedColumns: string[] = ['id', 'name', 'yearsOfExperience', 'status', 'action'];
   public company: Companies = new Companies();
   public techStack: Skills[] = [];
-
+  public status = Status;
+  public FileType2LabelMapping = FileType2LabelMapping;
   constructor(
     private readonly _client: Client,
     public dialog: MatDialog
@@ -88,8 +90,4 @@ export class JobsComponent implements OnInit {
       }
     });
   }
-  public get Status() {
-    return Status; 
-  }
-  
 }
