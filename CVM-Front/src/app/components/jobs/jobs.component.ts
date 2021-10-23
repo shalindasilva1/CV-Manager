@@ -1,11 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ColumnDefinition } from 'src/app/shared/column-definition';
-import { Client, Jobs, Companies, Skills } from '../../Services/NSWAG';
+import { Client, Jobs, Companies, Skills, Status } from '../../Services/NSWAG';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
-import { MatButtonModule } from '@angular/material/button';
 import { DialogIcon } from 'src/app/shared/dialog-data';
 import { JobAddComponent } from './job-add/job-add.component';
 
@@ -24,12 +22,7 @@ import { JobAddComponent } from './job-add/job-add.component';
 export class JobsComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Jobs> = new MatTableDataSource<Jobs>();
-  public displayedColumnsObject: ColumnDefinition[] = [
-    { id: 'id', name: 'ID' },
-    { id: 'name', name: 'Name' },
-    { id: 'yearsOfExperience', name: 'Years Of Experience' },
-    { id: 'status', name: 'Status' }];
-  public displayedColumns: string[] = this.displayedColumnsObject.map(c => c.id!).concat(['action']);
+  public displayedColumns: string[] = ['id','name','yearsOfExperience','status','action'];
   public company: Companies = new Companies();
   public techStack: Skills[] = [];
 
@@ -95,4 +88,8 @@ export class JobsComponent implements OnInit {
       }
     });
   }
+  public get Status() {
+    return Status; 
+  }
+  
 }

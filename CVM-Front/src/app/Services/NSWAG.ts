@@ -14,8 +14,57 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
-@Injectable()
-export class Client {
+export interface IClient {
+    /**
+     * @return Success
+     */
+    jobsAll(): Observable<Jobs[]>;
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    jobsPOST(body: Jobs | undefined): Observable<Jobs>;
+    /**
+     * @return Success
+     */
+    jobsGET(id: number): Observable<Jobs>;
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    jobsPUT(id: number, body: Jobs | undefined): Observable<void>;
+    /**
+     * @return Success
+     */
+    jobsDELETE(id: number): Observable<void>;
+    /**
+     * @return Success
+     */
+    resumesAll(): Observable<Resumes[]>;
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    resumesPOST(body: Resumes | undefined): Observable<Resumes>;
+    /**
+     * @return Success
+     */
+    resumesGET(id: number): Observable<Resumes>;
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    resumesPUT(id: number, body: Resumes | undefined): Observable<void>;
+    /**
+     * @return Success
+     */
+    resumesDELETE(id: number): Observable<void>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class Client implements IClient {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -576,7 +625,7 @@ export class Companies implements ICompanies {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
 
     constructor(data?: ICompanies) {
         if (data) {
@@ -589,10 +638,10 @@ export class Companies implements ICompanies {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>null;
-            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
+            this.id = _data["id"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>undefined;
+            this.name = _data["name"];
         }
     }
 
@@ -605,10 +654,10 @@ export class Companies implements ICompanies {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>null;
-        data["name"] = this.name !== undefined ? this.name : <any>null;
+        data["id"] = this.id;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>undefined;
+        data["name"] = this.name;
         return data; 
     }
 }
@@ -617,15 +666,15 @@ export interface ICompanies {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
 }
 
 export class Contacts implements IContacts {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    key?: string | null;
-    value?: string | null;
+    key?: string | undefined;
+    value?: string | undefined;
 
     constructor(data?: IContacts) {
         if (data) {
@@ -638,11 +687,11 @@ export class Contacts implements IContacts {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>null;
-            this.key = _data["key"] !== undefined ? _data["key"] : <any>null;
-            this.value = _data["value"] !== undefined ? _data["value"] : <any>null;
+            this.id = _data["id"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>undefined;
+            this.key = _data["key"];
+            this.value = _data["value"];
         }
     }
 
@@ -655,11 +704,11 @@ export class Contacts implements IContacts {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>null;
-        data["key"] = this.key !== undefined ? this.key : <any>null;
-        data["value"] = this.value !== undefined ? this.value : <any>null;
+        data["id"] = this.id;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>undefined;
+        data["key"] = this.key;
+        data["value"] = this.value;
         return data; 
     }
 }
@@ -668,15 +717,15 @@ export interface IContacts {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    key?: string | null;
-    value?: string | null;
+    key?: string | undefined;
+    value?: string | undefined;
 }
 
 export class Designations implements IDesignations {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
 
     constructor(data?: IDesignations) {
         if (data) {
@@ -689,10 +738,10 @@ export class Designations implements IDesignations {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>null;
-            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
+            this.id = _data["id"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>undefined;
+            this.name = _data["name"];
         }
     }
 
@@ -705,10 +754,10 @@ export class Designations implements IDesignations {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>null;
-        data["name"] = this.name !== undefined ? this.name : <any>null;
+        data["id"] = this.id;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>undefined;
+        data["name"] = this.name;
         return data; 
     }
 }
@@ -717,19 +766,19 @@ export interface IDesignations {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
 }
 
 export class Jobs implements IJobs {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
     status?: Status;
     yearsOfExperience?: number;
     companyId?: number;
     company?: Companies;
-    techStack?: Skills[] | null;
+    techStack?: Skills[] | undefined;
     expanded: Boolean = false;
     constructor(data?: IJobs) {
         if (data) {
@@ -742,21 +791,18 @@ export class Jobs implements IJobs {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>null;
-            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
-            this.status = _data["status"] !== undefined ? _data["status"] : <any>null;
-            this.yearsOfExperience = _data["yearsOfExperience"] !== undefined ? _data["yearsOfExperience"] : <any>null;
-            this.companyId = _data["companyId"] !== undefined ? _data["companyId"] : <any>null;
-            this.company = _data["company"] ? Companies.fromJS(_data["company"]) : <any>null;
+            this.id = _data["id"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>undefined;
+            this.name = _data["name"];
+            this.status = _data["status"];
+            this.yearsOfExperience = _data["yearsOfExperience"];
+            this.companyId = _data["companyId"];
+            this.company = _data["company"] ? Companies.fromJS(_data["company"]) : <any>undefined;
             if (Array.isArray(_data["techStack"])) {
                 this.techStack = [] as any;
                 for (let item of _data["techStack"])
                     this.techStack!.push(Skills.fromJS(item));
-            }
-            else {
-                this.techStack = <any>null;
             }
         }
     }
@@ -770,14 +816,14 @@ export class Jobs implements IJobs {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>null;
-        data["name"] = this.name !== undefined ? this.name : <any>null;
-        data["status"] = this.status !== undefined ? this.status : <any>null;
-        data["yearsOfExperience"] = this.yearsOfExperience !== undefined ? this.yearsOfExperience : <any>null;
-        data["companyId"] = this.companyId !== undefined ? this.companyId : <any>null;
-        data["company"] = this.company ? this.company.toJSON() : <any>null;
+        data["id"] = this.id;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>undefined;
+        data["name"] = this.name;
+        data["status"] = this.status;
+        data["yearsOfExperience"] = this.yearsOfExperience;
+        data["companyId"] = this.companyId;
+        data["company"] = this.company ? this.company.toJSON() : <any>undefined;
         if (Array.isArray(this.techStack)) {
             data["techStack"] = [];
             for (let item of this.techStack)
@@ -791,22 +837,22 @@ export interface IJobs {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
     status?: Status;
     yearsOfExperience?: number;
     companyId?: number;
     company?: Companies;
-    techStack?: Skills[] | null;
+    techStack?: Skills[] | undefined;
 }
 
 export class Resumes implements IResumes {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
-    path?: string | null;
-    email?: string | null;
-    contacts?: Contacts[] | null;
+    name?: string | undefined;
+    path?: string | undefined;
+    email?: string | undefined;
+    contacts?: Contacts[] | undefined;
     designation?: Designations;
 
     constructor(data?: IResumes) {
@@ -820,21 +866,18 @@ export class Resumes implements IResumes {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>null;
-            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
-            this.path = _data["path"] !== undefined ? _data["path"] : <any>null;
-            this.email = _data["email"] !== undefined ? _data["email"] : <any>null;
+            this.id = _data["id"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>undefined;
+            this.name = _data["name"];
+            this.path = _data["path"];
+            this.email = _data["email"];
             if (Array.isArray(_data["contacts"])) {
                 this.contacts = [] as any;
                 for (let item of _data["contacts"])
                     this.contacts!.push(Contacts.fromJS(item));
             }
-            else {
-                this.contacts = <any>null;
-            }
-            this.designation = _data["designation"] ? Designations.fromJS(_data["designation"]) : <any>null;
+            this.designation = _data["designation"] ? Designations.fromJS(_data["designation"]) : <any>undefined;
         }
     }
 
@@ -847,18 +890,18 @@ export class Resumes implements IResumes {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>null;
-        data["name"] = this.name !== undefined ? this.name : <any>null;
-        data["path"] = this.path !== undefined ? this.path : <any>null;
-        data["email"] = this.email !== undefined ? this.email : <any>null;
+        data["id"] = this.id;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>undefined;
+        data["name"] = this.name;
+        data["path"] = this.path;
+        data["email"] = this.email;
         if (Array.isArray(this.contacts)) {
             data["contacts"] = [];
             for (let item of this.contacts)
                 data["contacts"].push(item.toJSON());
         }
-        data["designation"] = this.designation ? this.designation.toJSON() : <any>null;
+        data["designation"] = this.designation ? this.designation.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -867,10 +910,10 @@ export interface IResumes {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
-    path?: string | null;
-    email?: string | null;
-    contacts?: Contacts[] | null;
+    name?: string | undefined;
+    path?: string | undefined;
+    email?: string | undefined;
+    contacts?: Contacts[] | undefined;
     designation?: Designations;
 }
 
@@ -878,7 +921,7 @@ export class Skills implements ISkills {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
 
     constructor(data?: ISkills) {
         if (data) {
@@ -891,10 +934,10 @@ export class Skills implements ISkills {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"] !== undefined ? _data["id"] : <any>null;
-            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>null;
-            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>null;
-            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
+            this.id = _data["id"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+            this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : <any>undefined;
+            this.name = _data["name"];
         }
     }
 
@@ -907,10 +950,10 @@ export class Skills implements ISkills {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>null;
-        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>null;
-        data["name"] = this.name !== undefined ? this.name : <any>null;
+        data["id"] = this.id;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : <any>undefined;
+        data["name"] = this.name;
         return data; 
     }
 }
@@ -919,13 +962,13 @@ export interface ISkills {
     id?: number;
     createdDate?: Date;
     modifiedDate?: Date;
-    name?: string | null;
+    name?: string | undefined;
 }
 
 export enum Status {
-    _1 = 1,
-    _2 = 2,
-    _3 = 3,
+    Todo = "Todo",
+    OnGoing = "OnGoing",
+    Done = "Done",
 }
 
 export class ApiException extends Error {
