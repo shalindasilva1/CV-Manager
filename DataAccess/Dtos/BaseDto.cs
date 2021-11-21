@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Domain.Entities
+namespace DataAccess.Dtos
 {
-    public class BaseEntity
+    public class BaseDto
     {
         public long Id { get; set; }
         public DateTime CreatedDate { get; set; }

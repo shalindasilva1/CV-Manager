@@ -1,4 +1,6 @@
+using AutoMapper;
 using DataAccess;
+using DataAccess.MapperProfiles;
 using DataAccess.Repositories;
 using DataAccess.UnitOfWork;
 using Domain.Interfaces;
@@ -27,6 +29,19 @@ namespace CV_Manager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new CompanyProfiles());
+                mc.AddProfile(new SkillProfiles());
+                mc.AddProfile(new JobProfiles());
+                mc.AddProfile(new ResumeProfiles());
+
+            });
+            mapperConfig.AssertConfigurationIsValid();
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: CROSPolicy,

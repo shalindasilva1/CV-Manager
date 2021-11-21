@@ -1,9 +1,10 @@
-﻿using CV_Manager.Models;
+﻿using AutoMapper;
+using CV_Manager.Models;
+using DataAccess.Dtos.Companies;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CV_Manager.Controllers
@@ -14,19 +15,23 @@ namespace CV_Manager.Controllers
     public class CompaniesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CompaniesController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+
+        public CompaniesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         // GET: api/Companies
         [HttpGet]
-        public async Task<ActionResult<List<Companies>>> GetCompanies()
+        public async Task<ActionResult<List<CompanyOutput>>> GetCompanies()
         {
             try
             {
-                var result = await _unitOfWork.Companies.GetAllAsync();
-                return Ok(result.ToList());
+                var companies = await _unitOfWork.Companies.GetAllAsync();
+                var result = _mapper.Map<IEnumerable<Companies>, List<CompanyOutput>>(companies);
+                return Ok(result);
             }
             catch (System.Exception ex)
             {
@@ -36,11 +41,13 @@ namespace CV_Manager.Controllers
 
         // GET: api/Companies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Companies>> GetCompanies(long id)
+        public async Task<ActionResult<CompanyOutput>> GetCompanies(long id)
         {
             try
             {
-                var result = await _unitOfWork.Companies.GetByIdAsync(id);
+                var company = await _unitOfWork.Companies.GetByIdAsync(id);
+                var result = _mapper.Map<CompanyOutput>(company);
+
                 if (result == null)
                 {
                     return NotFound();
@@ -56,16 +63,17 @@ namespace CV_Manager.Controllers
         // PUT: api/Companies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompanies(long id, Companies Companies)
+        public async Task<IActionResult> PutCompanies(long id, CompanyInput company)
         {
-            if (id != Companies.Id)
+            if (id != company.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                await _unitOfWork.Companies.UpdateAsync(Companies);
+                var input = _mapper.Map<Companies>(company);
+                await _unitOfWork.Companies.UpdateAsync(input);
             }
             catch (System.Exception ex)
             {
@@ -79,18 +87,19 @@ namespace CV_Manager.Controllers
                 }
             }
 
-            return Ok(Companies);
+            return Ok(company);
         }
 
         // POST: api/Companies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Companies>> PostCompanies(Companies Companies)
+        public async Task<ActionResult<Companies>> PostCompanies(CompanyInput company)
         {
             try
             {
-                await _unitOfWork.Companies.AddAsync(Companies);
-                return CreatedAtAction("GetCompanies", new { id = Companies.Id }, Companies);
+                var input = _mapper.Map<Companies>(company);
+                await _unitOfWork.Companies.AddAsync(input);
+                return CreatedAtAction("GetCompanies", new { id = company.Id }, company);
             }
             catch (System.Exception ex)
             {
