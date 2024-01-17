@@ -28,7 +28,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './Services/NSWAG';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
@@ -81,7 +80,6 @@ const materialModules = [
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     materialModules,
