@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, UntypedFormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Client, Companies, Jobs, Skills, Status } from 'src/app/Services/NSWAG';
 import { DialogData } from 'src/app/shared/dialog-data';
@@ -21,7 +21,7 @@ export class JobAddComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<JobAddComponent>,
     private readonly _client: Client,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
   }
