@@ -1,18 +1,26 @@
 using AutoMapper;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using DataAccess;
 using DataAccess.MapperProfiles;
 using DataAccess.Repositories;
 using DataAccess.UnitOfWork;
 using Domain.Interfaces;
 using Domain.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Text;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace CV_Manager
 {
@@ -41,7 +49,26 @@ namespace CV_Manager
             mapperConfig.AssertConfigurationIsValid();
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+            //JWT
+            var jwtSecretKey = Configuration["jWTSecretKey"];
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                
 
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "CV_manager",
+                    ValidAudience = "CVMFront",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
+                };
+            });
+
+            //CORS
             services.AddCors(options =>
             {
                 options.AddPolicy(name: CROSPolicy,
@@ -52,16 +79,20 @@ namespace CV_Manager
                                       .AllowAnyMethod();
                                   });
             });
+
+            //Controllers
             services.AddControllers().AddJsonOptions(x =>
             {
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
+            //Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CV_Manager", Version = "v1" });
             });
 
+            //DB Context
             services.AddDbContext<ApplicationContext>(options =>
                     options.UseSqlServer(
                         Configuration.GetConnectionString("CV_ManagerContext"),
@@ -99,6 +130,8 @@ namespace CV_Manager
             app.UseRouting();
 
             app.UseCors(CROSPolicy);
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

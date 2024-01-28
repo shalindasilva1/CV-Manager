@@ -17,6 +17,7 @@ export class JobAddComponent implements OnInit {
   public companies: Companies[] = [];
   public skills: Skills[] = [];
   public addJobForm: any;
+  public filteredCompanies: Companies[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<JobAddComponent>,
@@ -41,9 +42,10 @@ export class JobAddComponent implements OnInit {
   }
 
   getAllCompanies() {
-    this._client.companiesAll().subscribe(companies =>
-      this.companies = companies
-    );
+    this._client.companiesAll().subscribe(companies =>{
+        this.companies = companies
+        this.filteredCompanies = companies
+    });
   }
 
   getAllSkills() {
@@ -56,5 +58,14 @@ export class JobAddComponent implements OnInit {
     this._client.jobsPOST(new Jobs(this.addJobForm.value)).subscribe(result =>
       console.log(result)
     );
+  }
+
+  onKey($event: any) {
+    let filter = $event.srcElement?.value.toLowerCase();
+    if(filter){
+      this.filteredCompanies = this.companies.filter(option => option.name?.toString().toLowerCase().startsWith(filter));
+    } else {
+      this.filteredCompanies = this.companies;
+    }
   }
 }
