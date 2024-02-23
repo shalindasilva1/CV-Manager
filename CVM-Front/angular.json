@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "CVM-Front:build:production"
+              "buildTarget": "CVM-Front:build:production"
             },
             "development": {
-              "browserTarget": "CVM-Front:build:development"
+              "buildTarget": "CVM-Front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CVM-Front:build"
+            "buildTarget": "CVM-Front:build"
           }
         },
         "test": {
@@ -115,6 +115,5 @@
         }
       }
     }
-  },
-  "defaultProject": "CVM-Front"
+  }
 }
