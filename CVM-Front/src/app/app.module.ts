@@ -7,68 +7,24 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { HomeComponent } from './components/home/home.component';
-import { JobsComponent } from './components/jobs/jobs.component';
-import { ResumesComponent } from './components/resumes/resumes.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { JobCountsComponent } from './components/home/cards/job-counts/job-counts.component';
-import { MonthlyPerformanceComponent } from './components/home/cards/monthly-performance/monthly-performance.component';
-import { OngoingJobsComponent } from './components/home/cards/ongoing-jobs/ongoing-jobs.component';
-import { SkillCountsComponent } from './components/home/cards/skill-counts/skill-counts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './Services/NSWAG';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDialogModule } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
-import { JobAddComponent } from './components/jobs/job-add/job-add.component';
-import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-const materialModules = [
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatGridListModule,
-  MatCardModule,
-  MatMenuModule,
-  MatTooltipModule,
-  MatTableModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatChipsModule,
-  MatDialogModule,
-  MatButtonModule,
-  MatSelectModule
-];
+import { HomeModule } from './modules/home/home.module';
+import { JobsModule } from './modules/jobs/jobs.module';
+import { ResumesModule } from './modules/resumes/resumes.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
-    HomeComponent,
-    JobCountsComponent,
-    MonthlyPerformanceComponent,
-    OngoingJobsComponent,
-    SkillCountsComponent,
-    JobsComponent,
-    ResumesComponent,
-    ConfirmationDialogComponent,
-    JobAddComponent
   ],
   imports: [
+    HomeModule,
+    JobsModule,
+    ResumesModule,
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     ServiceWorkerModule.register('news-worker.js', {
@@ -80,9 +36,7 @@ const materialModules = [
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    materialModules,
+    FormsModule
   ],
   providers: [
     {

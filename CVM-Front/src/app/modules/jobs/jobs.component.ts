@@ -4,9 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Client, Jobs, Companies, Skills, Status } from '../../Services/NSWAG';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
-import { DialogIcon } from 'src/app/shared/dialog-data';
 import { JobAddComponent } from './job-add/job-add.component';
-import { FileType2LabelMapping } from 'src/app/shared/LabelMappings';
+import { FileType2LabelMapping } from '../../shared/LabelMappings';
+import { DialogIcon } from '../../shared/dialog-data';
 
 @Component({
   selector: 'app-jobs',

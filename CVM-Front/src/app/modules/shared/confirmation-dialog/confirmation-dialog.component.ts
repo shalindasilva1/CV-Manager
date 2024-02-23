@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData, DialogIcon } from 'src/app/shared/dialog-data';
+import { DialogData, DialogIcon } from './../../../../app/shared/dialog-data';
 
 @Component({
   selector: 'app-confirmation-dialog',
