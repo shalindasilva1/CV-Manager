@@ -14,6 +14,7 @@ import { HomeModule } from './modules/home/home.module';
 import { JobsModule } from './modules/jobs/jobs.module';
 import { ResumesModule } from './modules/resumes/resumes.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from './modules/shared/shared.module';
     MainNavComponent,
   ],
   imports: [
+    AuthenticationModule,
     HomeModule,
     JobsModule,
     ResumesModule,
