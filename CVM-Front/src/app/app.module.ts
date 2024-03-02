@@ -8,8 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL } from './Services/NSWAG';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HomeModule } from './modules/home/home.module';
 import { JobsModule } from './modules/jobs/jobs.module';
 import { ResumesModule } from './modules/resumes/resumes.module';
@@ -41,10 +40,6 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     FormsModule
   ],
   providers: [
-    {
-      provide: API_BASE_URL,
-      useValue: environment.apiRoot
-    }
   ],
   bootstrap: [AppComponent]
 })
