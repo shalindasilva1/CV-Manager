@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ LoginComponent ],
+  declarations: [],
   exports: [],
 })
 export class AuthenticationModule {}

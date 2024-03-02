@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { JobsService } from 'src/app/Services/SWAGGER/generated-services/api/api';
 
 
 @Component({
@@ -16,10 +17,12 @@ import { MatDialog } from '@angular/material/dialog';
     ])]
 })
 export class JobsComponent implements OnInit {
-
-  public displayedColumns: string[] = ['id', 'name', 'yearsOfExperience', 'status', 'action'];
+  dataSource: any[] = [];
+  public displayedColumns: string[] = ['id', 'designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
+  jobs!: import("d:/Repo/CV-Manager/CVM-Front/src/app/Services/SWAGGER/generated-services/index").JobDtoListResult;
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private jobsService: JobsService
   ) { }
 
   ngOnInit() {
@@ -27,7 +30,14 @@ export class JobsComponent implements OnInit {
   }
 
   getAllJobs() {
-
+    this.jobsService.apiJobsGet().subscribe(
+      (data) => {
+        this.jobs = data; // Assign the fetched jobs to the local array
+      },
+      (error) => {
+        console.error('Error fetching jobs:', error);
+      }
+    );
   }
 
   applyFilter(event: Event) {

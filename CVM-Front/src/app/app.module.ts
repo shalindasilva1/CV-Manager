@@ -14,14 +14,15 @@ import { JobsModule } from './modules/jobs/jobs.module';
 import { ResumesModule } from './modules/resumes/resumes.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { LoginComponent } from './modules/authentication/login/login.component';
 
 @NgModule({
   declarations: [
+    LoginComponent,
     AppComponent,
     MainNavComponent,
   ],
   imports: [
-    AuthenticationModule,
     HomeModule,
     JobsModule,
     ResumesModule,

@@ -32,3 +32,19 @@ table {
   background: #b7b7b773;
   text-align: center;
 }
+
+.filter-add-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-container {
+  flex: 1;
+  /* Take as much space as possible */
+}
+
+.add-button-container {
+  margin-left: 10px;
+  /* Add some spacing */
+}

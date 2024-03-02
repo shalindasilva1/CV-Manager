@@ -12,6 +12,7 @@ import { CardTypes } from '../../shared/card-types.enum';
 export class HomeComponent {
   cards$: Observable<any[]>;
   cardTypes = CardTypes;
+  tokenKey: string ="Bearer";
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.cards$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -34,5 +35,7 @@ export class HomeComponent {
       }),
       shareReplay()
     );
+
+    localStorage.setItem(this.tokenKey,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDVoMDk4YmI4cmViZXJid3I0dnZiODk0NSIsImp0aSI6ImEyOTBkZGE0LWJhM2YtNDNiMS05MTgxLWQ0YjAzNDM0NjlhMCIsImlhdCI6IjE3MDkzNjc2ODYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjZiMTM2YTMzLTVmOGQtNDMzNS04YTE2LWRlOGY1OWUyNWMxZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6InNoYWxpbmRhc2lsdmExQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzA5MzY5NDg2LCJpc3MiOiJFeGFtcGxlSXNzdWVyIiwiYXVkIjoiVmFsaWRBdWRpZW5jZSJ9._6nCRX550SD8KbenouBzAhfQ2uzK8N59k0ax3c_cIw4");
   }
 }

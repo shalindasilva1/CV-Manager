@@ -1,0 +1,36 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+}
+
+.logo-container {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00162e;
+    /* Optional: Background color for the logo section */
+}
+
+.logo-container img {
+    max-width: 80%;
+    /* Adjust the size of the logo */
+    max-height: 80%;
+    /* Adjust the size of the logo */
+}
+
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 300px;
+    /* Adjust the width of the login form */
+}
+
+button{
+    margin-right: 10px;
+}

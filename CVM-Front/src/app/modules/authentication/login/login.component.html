@@ -1,3 +1,28 @@
-<pre>
-  app-login
-</pre>
+<div class="login-container">
+  <div class="logo-container">
+    <!-- Replace 'logo.png' with your logo image path -->
+    <img src="assets/logo.png" alt="Logo">
+  </div>
+  <div class="form-container">
+    <mat-card class="login-card">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Your login form goes here -->
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password">
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" type="submit">Login</button>
+            <button mat-raised-button color="accent">Register</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
