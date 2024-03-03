@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { JobDto, JobDtoListResult, JobsService } from 'src/app/Services/SWAGGER';
+import { JobAddComponent } from './job-add/job-add.component';
 
 @Component({
   selector: 'app-jobs',
@@ -43,5 +44,18 @@ export class JobsComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+  }
+
+  openAddForm() {
+    // Open the dialog to add a new job
+    const dialogRef = this.dialog.open(JobAddComponent, {
+      width: '500px', // You can adjust the width as per your requirement
+      data: {} // You can pass data to the dialog if needed
+    });
+
+    // Subscribe to the dialog's afterClosed event to handle the result
+    dialogRef.afterClosed().subscribe(result => {
+      // Handle the result if needed
+    });
   }
 }

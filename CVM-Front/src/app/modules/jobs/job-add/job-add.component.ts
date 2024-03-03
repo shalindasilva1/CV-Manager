@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
 import { DialogData } from 'src/app/shared/dialog-data';
 
 @Component({
@@ -21,10 +22,11 @@ export class JobAddComponent implements OnInit {
   ngOnInit() {
     this.addJobForm = this.formBuilder.group({
       designation: '',
-      yearsOfExperience: '',
-      status: '',
-      company: '',
-      techStack: ''
+      description: '',
+      startSalary: 0,
+      endSalary: 0,
+      employment: NatureOfEmployment,
+      location: Location
     });
   }
 

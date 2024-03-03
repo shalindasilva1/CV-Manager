@@ -41,7 +41,7 @@ const materialModules = [
   imports: [
     CommonModule, 
     ...materialModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule, 

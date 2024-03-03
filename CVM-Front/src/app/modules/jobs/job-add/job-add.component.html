@@ -1,57 +1,47 @@
 <h2 mat-dialog-title>Add Job</h2>
 <mat-dialog-content>
   <form [formGroup]="addJobForm">
-    <table>
-      <tr>
-        <td>
-          <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field appearance="outline">
-            <mat-label>Years of experience</mat-label>
-            <input matInput type="number" formControlName="yearsOfExperience">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field appearance="outline">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="designation">
+    </mat-form-field>
+    <br/>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="5"></textarea>
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
               <mat-option *ngFor="let enumKey of enumKeys" [value]="enumKey">
-               
+
               </mat-option>
             </mat-select>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field appearance="outline">
+          </mat-form-field> -->
+
+    <!-- <mat-form-field appearance="outline">
             <mat-label>Company</mat-label>
             <mat-select formControlName="company">
               <mat-form-field appearance="legacy">
-                <input matInput formControlName="company" (keyup)="onKey($event)"/>
+                <input matInput formControlName="company" (keyup)="onKey($event)" />
               </mat-form-field>
-              <mat-option  [value]="">
-                
+              <mat-option [value]="">
+
               </mat-option>
             </mat-select>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field appearance="outline">
+          </mat-form-field> -->
+
+    <!-- <mat-form-field appearance="outline">
             <mat-label>Tech Stack</mat-label>
             <mat-select formControlName="techStack" multiple>
               <mat-option>
-                
+
               </mat-option>
             </mat-select>
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
+          </mat-form-field> -->
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

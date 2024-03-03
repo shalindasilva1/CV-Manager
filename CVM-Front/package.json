@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~17.0.9",
     "@angular/router": "~17.0.9",
     "@angular/service-worker": "~17.0.9",
+    "install": "^0.13.0",
+    "npm": "^10.5.0",
     "rxjs": "~6.6.0",
     "swagger-codegen-cli": "^2.2.3",
     "tslib": "^2.3.0",
