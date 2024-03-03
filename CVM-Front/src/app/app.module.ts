@@ -15,6 +15,7 @@ import { ResumesModule } from './modules/resumes/resumes.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { LoginComponent } from './modules/authentication/login/login.component';
+import { BASE_PATH } from './Services/SWAGGER';
 
 @NgModule({
   declarations: [
@@ -40,8 +41,7 @@ import { LoginComponent } from './modules/authentication/login/login.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [
-  ],
+  providers: [{ provide: BASE_PATH, useValue: 'http://localhost:44392' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
