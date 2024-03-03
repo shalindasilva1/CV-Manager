@@ -19,4 +19,8 @@ export class MainNavComponent {
         shareReplay()
       );
   }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
 }
