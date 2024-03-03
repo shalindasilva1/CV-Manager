@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { JobDto, JobDtoListResult, JobsService } from 'src/app/Services/SWAGGER';
 
 
 @Component({
@@ -16,12 +17,12 @@ import { MatDialog } from '@angular/material/dialog';
     ])]
 })
 export class JobsComponent implements OnInit {
-  dataSource: any[] = [];
-  public displayedColumns: string[] = ['id', 'designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
-  //jobs!: import("d:/Repo/CV-Manager/CVM-Front/src/app/Services/SWAGGER/generated-services/index").JobDtoListResult;
+  public dataSource: JobDto[] | null | undefined;
+  public displayedColumns: string[] = ['designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
+  public jobs!: JobDtoListResult
   constructor(
     public dialog: MatDialog,
-    //private jobsService: JobsService
+    private jobsService: JobsService
   ) { }
 
   ngOnInit() {
@@ -29,15 +30,19 @@ export class JobsComponent implements OnInit {
   }
 
   getAllJobs() {
-    // this.jobsService.apiJobsGet().subscribe(
-    //   (data) => {
-    //     this.jobs = data; // Assign the fetched jobs to the local array
-    //   },
-    //   (error) => {
-    //     console.error('Error fetching jobs:', error);
-    //   }
-    // );
+    this.jobsService.apiJobsGet().subscribe(
+      (data) => {
+        if (data && data.data) { // Check if data and data.data are not null or undefined
+          this.jobs = data;
+          this.dataSource = this.jobs.data;
+        }
+      },
+      (error) => {
+        console.error('Error fetching jobs:', error);
+      }
+    );
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

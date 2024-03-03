@@ -11,11 +11,11 @@
  */
 
 
-export type NatureOfEmployment = 0 | 1 | 2;
+export type NatureOfEmployment = 'FullTime' | 'PartTime' | 'Contract';
 
 export const NatureOfEmployment = {
-    NUMBER_0: 0 as NatureOfEmployment,
-    NUMBER_1: 1 as NatureOfEmployment,
-    NUMBER_2: 2 as NatureOfEmployment
+    FullTime: 'FullTime' as NatureOfEmployment,
+    PartTime: 'PartTime' as NatureOfEmployment,
+    Contract: 'Contract' as NatureOfEmployment
 };
 

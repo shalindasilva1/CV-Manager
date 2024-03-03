@@ -11,11 +11,11 @@
  */
 
 
-export type Location = 0 | 1 | 2;
+export type Location = 'Onsite' | 'Remote' | 'Hybrid';
 
 export const Location = {
-    NUMBER_0: 0 as Location,
-    NUMBER_1: 1 as Location,
-    NUMBER_2: 2 as Location
+    Onsite: 'Onsite' as Location,
+    Remote: 'Remote' as Location,
+    Hybrid: 'Hybrid' as Location
 };
 

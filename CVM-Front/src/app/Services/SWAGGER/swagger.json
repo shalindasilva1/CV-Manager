@@ -1439,12 +1439,11 @@
             },
             "Location": {
                 "enum": [
-                    0,
-                    1,
-                    2
+                    "Onsite",
+                    "Remote",
+                    "Hybrid"
                 ],
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
             },
             "LoginDTO": {
                 "required": [
@@ -1466,20 +1465,18 @@
             },
             "NatureOfEmployment": {
                 "enum": [
-                    0,
-                    1,
-                    2
+                    "FullTime",
+                    "PartTime",
+                    "Contract"
                 ],
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
             },
             "Role": {
                 "enum": [
-                    0,
-                    1
+                    "Admin",
+                    "User"
                 ],
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
             }
         },
         "securitySchemes": {
