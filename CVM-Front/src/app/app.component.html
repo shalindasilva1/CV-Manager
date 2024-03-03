@@ -1,2 +1,4 @@
-<app-login></app-login>
-<!-- <app-main-nav></app-main-nav> -->
+<div *ngIf="!hasToken()">
+    <app-login></app-login>
+</div>
+<app-main-nav *ngIf="hasToken()"></app-main-nav>

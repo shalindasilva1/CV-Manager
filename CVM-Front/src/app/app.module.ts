@@ -16,6 +16,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { LoginComponent } from './modules/authentication/login/login.component';
 import { BASE_PATH } from './Services/SWAGGER';
+import { ServiceModule } from './Services/service.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { BASE_PATH } from './Services/SWAGGER';
     JobsModule,
     ResumesModule,
     SharedModule,
+    ServiceModule,
     BrowserModule,
     AppRoutingModule,
     ServiceWorkerModule.register('news-worker.js', {
@@ -41,7 +43,7 @@ import { BASE_PATH } from './Services/SWAGGER';
     HttpClientModule,
     FormsModule
   ],
-  providers: [{ provide: BASE_PATH, useValue: 'http://localhost:44392' }],
+  providers: [{ provide: BASE_PATH, useValue: 'https://localhost:44392' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Talent Vault';
+  
+  hasToken(): boolean {
+    return !!localStorage.getItem('token');
+  }
+  
 }
