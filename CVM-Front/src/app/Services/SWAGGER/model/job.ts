@@ -22,7 +22,7 @@ export interface Job {
     modifiedBy?: string | null;
     tenantId?: number;
     designation?: string | null;
-    discription?: string | null;
+    description?: string | null;
     startSalary?: number;
     endSalary?: number;
     categories?: Array<Category> | null;

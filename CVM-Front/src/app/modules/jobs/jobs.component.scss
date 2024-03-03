@@ -1,58 +1,49 @@
 .grid-container {
   margin: 20px;
-}
 
-mat-card {
-  margin: 10px;
-}
+  h1.mat-h1 {
+    margin-bottom: 20px;
+  }
 
-table {
-  width: 100%;
-}
+  .filter-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
+    .filter-container {
+      flex: 1;
 
-.detail-row {
-  height: 0;
-}
+      mat-form-field {
+        font-size: 14px;
+        width: 100%;
+      }
+    }
 
-.element-row td {
-  border-bottom-width: 0;
-}
+    .add-button-container {
+      margin-left: 10px;
+    }
+  }
 
-.element-detail {
-  overflow: hidden;
-  display: flex;
-}
+  table {
+    width: 100%;
+    border-collapse: collapse;
 
-.detail-table {
-  background: #b7b7b773;
-  text-align: center;
-}
+    th.mat-header-cell,
+    td.mat-cell {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
 
-.filter-add-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .mat-row:last-child td.mat-cell {
+      border-bottom: none;
+    }
+  }
 
-.filter-container {
-  flex: 1;
-  /* Take as much space as possible */
-}
-
-.add-button-container {
-  margin-left: 10px;
-  /* Add some spacing */
-}
-
-.truncate-cell {
-  max-width: 200px;
-  /* Adjust this value as needed */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  .truncate-cell {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

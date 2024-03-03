@@ -9,63 +9,57 @@
       </mat-form-field>
     </div>
     <div class="add-button-container">
-      <button mat-fab color="primary" matTooltip="Add Jobs" (click)="openAddJobForm()">
+      <button mat-fab color="primary" matTooltip="Add Jobs">
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </div>
   <!-- Data table -->
-  <table mat-table [dataSource]="dataSource!" class="mat-elevation-z8" style="width: 100%;">
-
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Displayed columns -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">ID</th>
-      <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.id}}</td>
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{element.id}}</td>
     </ng-container>
     <ng-container matColumnDef="designation">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">Designation</th>
-      <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.designation}}</td>
+      <th mat-header-cell *matHeaderCellDef>Designation</th>
+      <td mat-cell *matCellDef="let element">{{element.designation}}</td>
     </ng-container>
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">JD</th>
-      <td mat-cell *matCellDef="let element" class="truncate-cell" matTooltip="{{element.discription}}"
-        style="text-align: center;">{{element.discription}}</td>
+      <th mat-header-cell *matHeaderCellDef>JD</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.description" class="truncate-cell">
+        {{element.description}}</td>
     </ng-container>
     <ng-container matColumnDef="salaryRatio">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">Salary Ratio</th>
-      <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.startSalary}} - {{element.endSalary}}
-      </td>
+      <th mat-header-cell *matHeaderCellDef>Salary Ratio</th>
+      <td mat-cell *matCellDef="let element">{{element.startSalary}} - {{element.endSalary}}</td>
     </ng-container>
     <ng-container matColumnDef="employment">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">Employment Type</th>
-      <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.employment}}</td>
+      <th mat-header-cell *matHeaderCellDef>Employment Type</th>
+      <td mat-cell *matCellDef="let element">{{element.employment}}</td>
     </ng-container>
     <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">Job Type</th>
-      <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.location}}</td>
+      <th mat-header-cell *matHeaderCellDef>Location</th>
+      <td mat-cell *matCellDef="let element">{{element.location}}</td>
     </ng-container>
-    <!-- Settings column -->
+    <!-- Actions column -->
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;">Action</th>
-      <td mat-cell *matCellDef="let element" style="text-align: center;">
-        <button mat-icon-button matTooltip="Edit Job" color="primary" (click)="openAddJobForm()">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button matTooltip="Edit Job" color="primary">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Delete Job" color="warn" (click)="deleteJob()">
+        <button mat-icon-button matTooltip="Delete Job" color="warn">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>
-
+    <!-- Row to display no data -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns" class="element-row"></tr>
-
-    <tr class="mat-row">
+    <tr class="mat-row" *ngIf="!dataSource || dataSource.length === 0">
       <td class="mat-cell" [attr.colspan]="displayedColumns.length" style="text-align: center;">No data matching the
         filter</td>
     </tr>
-
   </table>
-
-
 </div>

@@ -1277,7 +1277,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "discription": {
+                    "description": {
                         "type": "string",
                         "nullable": true
                     },
@@ -1382,7 +1382,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "discription": {
+                    "description": {
                         "type": "string",
                         "nullable": true
                     },

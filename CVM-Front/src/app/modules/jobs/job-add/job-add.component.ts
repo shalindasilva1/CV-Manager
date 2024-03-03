@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, UntypedFormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from 'src/app/shared/dialog-data';
 
@@ -16,28 +16,16 @@ export class JobAddComponent implements OnInit {
     private dialogRef: MatDialogRef<JobAddComponent>,
     private formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.addJobForm = this.formBuilder.group({
-      name: '',
+      designation: '',
       yearsOfExperience: '',
       status: '',
       company: '',
       techStack: ''
     });
-    this.getAllCompanies();
-    this.getAllSkills();
-
-  }
-
-  getAllCompanies() {
-   
-  }
-
-  getAllSkills() {
-   
   }
 
   addJob() {

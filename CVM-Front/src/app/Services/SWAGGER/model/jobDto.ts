@@ -21,7 +21,7 @@ export interface JobDto {
     modifiedBy?: string | null;
     tenantId?: number;
     designation?: string | null;
-    discription?: string | null;
+    description?: string | null;
     startSalary?: number;
     endSalary?: number;
     employment?: NatureOfEmployment;
