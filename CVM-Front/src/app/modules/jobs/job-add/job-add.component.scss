@@ -1,13 +1,14 @@
-/* Add this style to your global styles or component-specific SCSS */
-.mat-dialog-container {
+.job-form {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
 }
 
-/* This will stretch all input elements */
-.mat-dialog-container input,
-.mat-dialog-container textarea,
-.mat-dialog-container select {
-    width: 100%;
+.input-row {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+    margin-right: 10px;
+    /* Adjust as needed */
 }

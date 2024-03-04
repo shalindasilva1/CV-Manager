@@ -1,50 +1,47 @@
 <h2 mat-dialog-title>Add Job</h2>
 <mat-dialog-content>
-  <form [formGroup]="addJobForm">
-
-    <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
+  <form [formGroup]="addJobForm" class="job-form">
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Designation</mat-label>
       <input matInput formControlName="designation">
     </mat-form-field>
-    <br/>
+
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Minimum Salary</mat-label>
+        <input matInput formControlName="startSalary" type="number" step="500" min="0">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Maximum Salary</mat-label>
+        <input matInput formControlName="endSalary" type="number" step="500">
+      </mat-form-field>
+    </div>
+
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description" rows="5"></textarea>
     </mat-form-field>
+    
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Nature of Employment</mat-label>
+        <mat-select formControlName="natureOfEmployment">
+          <mat-option *ngFor="let employmentType of employmentTypes" [value]="employmentType">{{ employmentType
+            }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Location</mat-label>
+        <mat-select formControlName="location">
+          <mat-option *ngFor="let loc of locations" [value]="loc">{{ loc }}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- <mat-form-field appearance="outline">
-            <mat-label>Status</mat-label>
-            <mat-select formControlName="status">
-              <mat-option *ngFor="let enumKey of enumKeys" [value]="enumKey">
-
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
-    <!-- <mat-form-field appearance="outline">
-            <mat-label>Company</mat-label>
-            <mat-select formControlName="company">
-              <mat-form-field appearance="legacy">
-                <input matInput formControlName="company" (keyup)="onKey($event)" />
-              </mat-form-field>
-              <mat-option [value]="">
-
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
-    <!-- <mat-form-field appearance="outline">
-            <mat-label>Tech Stack</mat-label>
-            <mat-select formControlName="techStack" multiple>
-              <mat-option>
-
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
+    </div>
 
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addJob()">Save</button>
+  <button mat-button cdkFocusInitial (click)="addJob()" color="primary">Save</button>
 </mat-dialog-actions>

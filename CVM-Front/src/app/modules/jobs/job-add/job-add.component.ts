@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
+import { JobDto, JobsService, Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
 import { DialogData } from 'src/app/shared/dialog-data';
 
 @Component({
@@ -12,9 +12,12 @@ import { DialogData } from 'src/app/shared/dialog-data';
 export class JobAddComponent implements OnInit {
   public enumKeys: string[] = [];
   public addJobForm: any;
+  public employmentTypes: NatureOfEmployment[] = Object.values(NatureOfEmployment);
+  public locations: Location[] = Object.values(Location);
 
   constructor(
     private dialogRef: MatDialogRef<JobAddComponent>,
+    private jobsService: JobsService,
     private formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
@@ -25,16 +28,29 @@ export class JobAddComponent implements OnInit {
       description: '',
       startSalary: 0,
       endSalary: 0,
-      employment: NatureOfEmployment,
+      natureOfEmployment: NatureOfEmployment,
       location: Location
     });
   }
 
-  addJob() {
-    
+  async addJob() {
+    try {
+      // Create a new instance of JobDto
+      const jobDto: JobDto = {
+        designation: this.addJobForm.get('designation').value,
+        description: this.addJobForm.get('description').value,
+        startSalary: this.addJobForm.get('startSalary').value,
+        endSalary: this.addJobForm.get('endSalary').value,
+        employment: this.addJobForm.get('natureOfEmployment').value,
+        location: this.addJobForm.get('location').value
+      };
+
+      // Make API call to add the job
+      const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
+      console.log('Job added successfully:', result);
+    } catch (error) {
+      console.error('Error adding job:', error);
+    }
   }
 
-  onKey($event: any) {
-    
-  }
 }
