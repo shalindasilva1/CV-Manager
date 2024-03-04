@@ -21,7 +21,7 @@
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description" rows="5"></textarea>
     </mat-form-field>
-    
+
     <div class="input-row">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Nature of Employment</mat-label>
@@ -37,6 +37,9 @@
         </mat-select>
       </mat-form-field>
 
+    </div>
+
+    <div class="spinner-container" *ngIf="loading">
     </div>
 
   </form>

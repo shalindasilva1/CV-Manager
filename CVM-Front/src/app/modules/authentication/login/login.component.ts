@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginDTO, UserService } from 'src/app/Services/SWAGGER';
+import { UserManagementService } from 'src/app/Services/userManagement/usermanagement.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
   loginDTO!: LoginDTO;
   constructor(
     private userService: UserService,
+    private userManagementService: UserManagementService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -35,6 +37,11 @@ export class LoginComponent {
         (res) => {
           if (res && res.data.token){
             localStorage.setItem('token', res.data.token);
+            if (res.data.user) {
+              localStorage.setItem('user', JSON.stringify(res.data.user));
+              this.userManagementService.setUser(res.data.user);
+
+            }
           }
           
         },

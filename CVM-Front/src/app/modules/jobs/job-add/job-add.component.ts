@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobDto, JobsService, Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
+import { UserManagementService } from 'src/app/Services/userManagement/usermanagement.service';
 import { DialogData } from 'src/app/shared/dialog-data';
 
 @Component({
@@ -14,11 +15,13 @@ export class JobAddComponent implements OnInit {
   public addJobForm: any;
   public employmentTypes: NatureOfEmployment[] = Object.values(NatureOfEmployment);
   public locations: Location[] = Object.values(Location);
+  loginUser: any;
+  loading: boolean = false;
 
   constructor(
-    private dialogRef: MatDialogRef<JobAddComponent>,
     private jobsService: JobsService,
     private formBuilder: UntypedFormBuilder,
+    private userManagementService: UserManagementService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
@@ -31,26 +34,31 @@ export class JobAddComponent implements OnInit {
       natureOfEmployment: NatureOfEmployment,
       location: Location
     });
+    this.loginUser = this.userManagementService.getUser();
   }
 
   async addJob() {
     try {
-      // Create a new instance of JobDto
+      this.loading = true; 
+
       const jobDto: JobDto = {
         designation: this.addJobForm.get('designation').value,
         description: this.addJobForm.get('description').value,
         startSalary: this.addJobForm.get('startSalary').value,
         endSalary: this.addJobForm.get('endSalary').value,
         employment: this.addJobForm.get('natureOfEmployment').value,
-        location: this.addJobForm.get('location').value
+        location: this.addJobForm.get('location').value,
+        createdBy: this.loginUser.id
       };
 
-      // Make API call to add the job
       const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
       console.log('Job added successfully:', result);
     } catch (error) {
       console.error('Error adding job:', error);
+    } finally {
+      this.loading = false;
     }
   }
+
 
 }
