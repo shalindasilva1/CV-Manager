@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { JobDto, JobDtoListResult, JobsService } from 'src/app/Services/SWAGGER';
 import { JobAddComponent } from './job-add/job-add.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-jobs',
@@ -18,7 +19,7 @@ import { JobAddComponent } from './job-add/job-add.component';
 })
 export class JobsComponent implements OnInit {
 
-  dataSource: JobDto[] = [];
+  dataSource!: MatTableDataSource<JobDto>;
   displayedColumns: string[] = ['designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
   jobs: JobDtoListResult | undefined;
 
@@ -36,7 +37,7 @@ export class JobsComponent implements OnInit {
       const data = await this.jobsService.apiJobsGet().toPromise();
       if (data && data.data) {
         this.jobs = data;
-        this.dataSource = data.data.map((item: any) => item as JobDto);
+        this.dataSource = new MatTableDataSource<JobDto>(data.data); 
       }
     } catch (error) {
       console.error('Error fetching jobs:', error);
@@ -45,6 +46,7 @@ export class JobsComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   openAddForm() {
@@ -59,15 +61,15 @@ export class JobsComponent implements OnInit {
   }
 
   async deleteJob(jobId: number) {
-    try {
-      await this.jobsService.apiJobsIdDelete(jobId).toPromise();
+    // try {
+    //   await this.jobsService.apiJobsIdDelete(jobId).toPromise();
 
-      this.dataSource = this.dataSource.filter(job => job.id !== jobId);
+    //   this.dataSource = this.dataSource.filter(job => job.id !== jobId);
 
-      console.log('Job deleted successfully');
-    } catch (error) {
-      console.error('Error deleting job:', error);
-    }
+    //   console.log('Job deleted successfully');
+    // } catch (error) {
+    //   console.error('Error deleting job:', error);
+    // }
   }
 
 }

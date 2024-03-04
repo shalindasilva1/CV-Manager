@@ -57,7 +57,7 @@
     <!-- Row to display no data -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns" class="element-row"></tr>
-    <tr class="mat-row" *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="mat-row" *ngIf="!dataSource || dataSource.data.length === 0">
       <td class="mat-cell" [attr.colspan]="displayedColumns.length" style="text-align: center;">No data matching the
         filter</td>
     </tr>
