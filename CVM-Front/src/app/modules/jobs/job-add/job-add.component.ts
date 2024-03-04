@@ -15,8 +15,9 @@ export class JobAddComponent implements OnInit {
   public addJobForm: any;
   public employmentTypes: NatureOfEmployment[] = Object.values(NatureOfEmployment);
   public locations: Location[] = Object.values(Location);
-  loginUser: any;
-  loading: boolean = false;
+  public loginUser: any;
+  public loading: boolean = false;
+  public successMessage: string | null = null;
 
   constructor(
     private jobsService: JobsService,
@@ -52,6 +53,7 @@ export class JobAddComponent implements OnInit {
       };
 
       const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
+      this.successMessage = 'New Job added successfully!';
       console.log('Job added successfully:', result);
     } catch (error) {
       console.error('Error adding job:', error);

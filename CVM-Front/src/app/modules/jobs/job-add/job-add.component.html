@@ -1,45 +1,53 @@
 <h2 mat-dialog-title>Add Job</h2>
 <mat-dialog-content>
-  <form [formGroup]="addJobForm" class="job-form" *ngIf="!loading">
-    <mat-form-field appearance="outline" class="flex-1">
-      <mat-label>Designation</mat-label>
-      <input matInput formControlName="designation">
-    </mat-form-field>
-    <div class="input-row">
+  <div *ngIf="!loading && !successMessage; else successMsg">
+    <form [formGroup]="addJobForm" class="job-form" *ngIf="!loading">
       <mat-form-field appearance="outline" class="flex-1">
-        <mat-label>Minimum Salary</mat-label>
-        <input matInput formControlName="startSalary" type="number" step="500" min="0">
+        <mat-label>Designation</mat-label>
+        <input matInput formControlName="designation">
       </mat-form-field>
-      <mat-form-field appearance="outline" class="flex-1">
-        <mat-label>Maximum Salary</mat-label>
-        <input matInput formControlName="endSalary" type="number" step="500">
+      <div class="input-row">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Minimum Salary</mat-label>
+          <input matInput formControlName="startSalary" type="number" step="500" min="0">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Maximum Salary</mat-label>
+          <input matInput formControlName="endSalary" type="number" step="500">
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="5"></textarea>
       </mat-form-field>
+      <div class="input-row">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Nature of Employment</mat-label>
+          <mat-select formControlName="natureOfEmployment">
+            <mat-option *ngFor="let employmentType of employmentTypes" [value]="employmentType">{{ employmentType
+              }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Location</mat-label>
+          <mat-select formControlName="location">
+            <mat-option *ngFor="let loc of locations" [value]="loc">{{ loc }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="spinner-container" *ngIf="loading">
+      <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
     </div>
-    <mat-form-field appearance="outline">
-      <mat-label>Description</mat-label>
-      <textarea matInput formControlName="description" rows="5"></textarea>
-    </mat-form-field>
-    <div class="input-row">
-      <mat-form-field appearance="outline" class="flex-1">
-        <mat-label>Nature of Employment</mat-label>
-        <mat-select formControlName="natureOfEmployment">
-          <mat-option *ngFor="let employmentType of employmentTypes" [value]="employmentType">{{ employmentType
-            }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="flex-1">
-        <mat-label>Location</mat-label>
-        <mat-select formControlName="location">
-          <mat-option *ngFor="let loc of locations" [value]="loc">{{ loc }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </form>
-  <div class="spinner-container" *ngIf="loading">
-    <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
   </div>
+  <ng-template #successMsg>
+    <div class="success-message">
+      <mat-icon>check_circle</mat-icon>
+      {{ successMessage }}
+    </div>
+  </ng-template>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="addJob()" color="primary">Save</button>
+  <button *ngIf="!successMessage" mat-button cdkFocusInitial (click)="addJob()" color="primary">Save</button>
 </mat-dialog-actions>
