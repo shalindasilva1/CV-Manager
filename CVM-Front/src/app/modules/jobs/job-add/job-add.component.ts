@@ -3,7 +3,6 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobDto, JobsService, Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
 import { UserManagementService } from 'src/app/Services/user-management/user-management.service';
-import { DialogData } from 'src/app/shared/dialog-data';
 
 @Component({
   selector: 'app-job-add',
@@ -64,10 +63,17 @@ export class JobAddComponent implements OnInit {
         location: this.addJobForm.get('location').value,
         createdBy: this.loginUser.id
       };
-
-      const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
-      this.successMessage = 'New Job added successfully!';
-      console.log('Job added successfully:', result);
+      if(this.data && this.data.jobData && this.data.jobData.id){
+        jobDto.id = this.data.jobData.id;
+        const result = await this.jobsService.apiJobsIdPut(this.data.jobData.id, jobDto).toPromise();
+        this.successMessage = 'Job updated successfully!';
+        console.log('Job updated successfully:', result);
+      }else{
+        const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
+        this.successMessage = 'New Job added successfully!';
+        console.log('Job added successfully:', result);
+      }
+      
     } catch (error) {
       console.error('Error adding job:', error);
     } finally {

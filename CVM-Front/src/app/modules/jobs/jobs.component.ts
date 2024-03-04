@@ -56,9 +56,7 @@ export class JobsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'success') {
-        this.getAllJobs();
-      }
+      this.getAllJobs();
     });
   }
 
@@ -69,9 +67,7 @@ export class JobsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'success') {
-        this.getAllJobs();
-      }
+      this.getAllJobs();
     });
   }
 
