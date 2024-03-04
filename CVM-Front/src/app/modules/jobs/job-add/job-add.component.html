@@ -1,11 +1,10 @@
 <h2 mat-dialog-title>Add Job</h2>
 <mat-dialog-content>
-  <form [formGroup]="addJobForm" class="job-form">
+  <form [formGroup]="addJobForm" class="job-form" *ngIf="!loading">
     <mat-form-field appearance="outline" class="flex-1">
       <mat-label>Designation</mat-label>
       <input matInput formControlName="designation">
     </mat-form-field>
-
     <div class="input-row">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Minimum Salary</mat-label>
@@ -16,12 +15,10 @@
         <input matInput formControlName="endSalary" type="number" step="500">
       </mat-form-field>
     </div>
-
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description" rows="5"></textarea>
     </mat-form-field>
-
     <div class="input-row">
       <mat-form-field appearance="outline" class="flex-1">
         <mat-label>Nature of Employment</mat-label>
@@ -36,13 +33,11 @@
           <mat-option *ngFor="let loc of locations" [value]="loc">{{ loc }}</mat-option>
         </mat-select>
       </mat-form-field>
-
     </div>
-
-    <div class="spinner-container" *ngIf="loading">
-    </div>
-
   </form>
+  <div class="spinner-container" *ngIf="loading">
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>

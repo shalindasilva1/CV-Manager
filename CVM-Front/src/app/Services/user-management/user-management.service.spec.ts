@@ -1,4 +1,4 @@
-import { UserManagementService } from "./usermanagement.service";
+import { UserManagementService } from './user-management.service';
 
 describe('UserManagementService', () => {
   const service: UserManagementService = new UserManagementService();

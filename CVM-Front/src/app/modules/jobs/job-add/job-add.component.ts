@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobDto, JobsService, Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
-import { UserManagementService } from 'src/app/Services/userManagement/usermanagement.service';
+import { UserManagementService } from 'src/app/Services/user-management/user-management.service';
 import { DialogData } from 'src/app/shared/dialog-data';
 
 @Component({

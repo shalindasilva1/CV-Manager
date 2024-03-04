@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginDTO, UserService } from 'src/app/Services/SWAGGER';
-import { UserManagementService } from 'src/app/Services/userManagement/usermanagement.service';
+import { UserManagementService } from 'src/app/Services/user-management/user-management.service';
 
 @Component({
   selector: 'app-login',
