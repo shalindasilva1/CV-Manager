@@ -17,6 +17,7 @@ import { JobAddComponent } from './job-add/job-add.component';
   ]
 })
 export class JobsComponent implements OnInit {
+
   dataSource: JobDto[] = [];
   displayedColumns: string[] = ['designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
   jobs: JobDtoListResult | undefined;
@@ -56,4 +57,17 @@ export class JobsComponent implements OnInit {
       this.getAllJobs();
     });
   }
+
+  async deleteJob(jobId: number) {
+    try {
+      await this.jobsService.apiJobsIdDelete(jobId).toPromise();
+
+      this.dataSource = this.dataSource.filter(job => job.id !== jobId);
+
+      console.log('Job deleted successfully');
+    } catch (error) {
+      console.error('Error deleting job:', error);
+    }
+  }
+
 }
