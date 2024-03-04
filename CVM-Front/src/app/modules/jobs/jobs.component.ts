@@ -61,15 +61,15 @@ export class JobsComponent implements OnInit {
   }
 
   async deleteJob(jobId: number) {
-    // try {
-    //   await this.jobsService.apiJobsIdDelete(jobId).toPromise();
+    try {
+      await this.jobsService.apiJobsIdDelete(jobId).toPromise();
 
-    //   this.dataSource = this.dataSource.filter(job => job.id !== jobId);
+      this.dataSource.data = this.dataSource.data.filter(job => job.id !== jobId);
 
-    //   console.log('Job deleted successfully');
-    // } catch (error) {
-    //   console.error('Error deleting job:', error);
-    // }
+      console.log('Job deleted successfully');
+    } catch (error) {
+      console.error('Error deleting job:', error);
+    }
   }
 
 }
