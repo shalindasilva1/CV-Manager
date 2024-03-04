@@ -20,10 +20,11 @@ export class JobAddComponent implements OnInit {
   public successMessage: string | null = null;
 
   constructor(
+    private dialogRef: MatDialogRef<JobAddComponent>,
     private jobsService: JobsService,
     private formBuilder: UntypedFormBuilder,
     private userManagementService: UserManagementService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: { jobData: JobDto }
   ) {}
 
   ngOnInit() {
@@ -35,6 +36,18 @@ export class JobAddComponent implements OnInit {
       natureOfEmployment: NatureOfEmployment,
       location: Location
     });
+
+    if (this.data && this.data.jobData) {
+      const job = this.data.jobData;
+      this.addJobForm.patchValue({
+        designation: job.designation,
+        description: job.description,
+        startSalary: job.startSalary,
+        endSalary: job.endSalary,
+        natureOfEmployment: job.employment,
+        location: job.location
+      });
+    }
     this.loginUser = this.userManagementService.getUser();
   }
 

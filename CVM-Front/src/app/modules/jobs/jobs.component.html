@@ -46,7 +46,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button matTooltip="Edit Job" color="primary">
+        <button mat-icon-button matTooltip="Edit Job" color="primary" (click)="updateJob(element)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button matTooltip="Delete Job" color="warn" (click)="deleteJob(element.id)">
