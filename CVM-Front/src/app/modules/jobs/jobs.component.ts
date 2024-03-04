@@ -47,15 +47,13 @@ export class JobsComponent implements OnInit {
   }
 
   openAddForm() {
-    // Open the dialog to add a new job
     const dialogRef = this.dialog.open(JobAddComponent, {
-      width: '500px', // You can adjust the width as per your requirement
-      data: {} // You can pass data to the dialog if needed
+      width: '500px',
+      data: {} 
     });
 
-    // Subscribe to the dialog's afterClosed event to handle the result
     dialogRef.afterClosed().subscribe(result => {
-      // Handle the result if needed
+      this.getAllJobs();
     });
   }
 }
