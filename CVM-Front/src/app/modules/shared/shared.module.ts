@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatiTableComponent } from './mati-table/mati-table.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -49,8 +50,12 @@ const materialModules = [
     CommonModule, 
     ...materialModules, 
     ConfirmationDialogComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatiTableComponent,
   ],
-  declarations: [ConfirmationDialogComponent]
+  declarations: [
+    ConfirmationDialogComponent,
+    MatiTableComponent
+  ]
 })
 export class SharedModule {}

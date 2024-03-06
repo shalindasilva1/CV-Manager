@@ -60,7 +60,7 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  updateJob(job: JobDto){
+  updateEvent(job: JobDto){
     const dialogRef = this.dialog.open(JobAddComponent, {
       width: '500px',
       data: { jobData: job } 
@@ -71,7 +71,7 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  async deleteJob(jobId: number) {
+  async deleteEvent(jobId: number) {
     try {
       await this.jobsService.apiJobsIdDelete(jobId).toPromise();
 
