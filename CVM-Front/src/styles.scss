@@ -1,4 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.grid-container {
+    margin: 20px;
+}
+
+.filter-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1.mat-h1 {
+        margin-bottom: 20px;
+    }
+
+    .filter-container {
+        flex: 1;
+
+        mat-form-field {
+            font-size: 14px;
+            width: 100%;
+        }
+    }
+
+    .add-button-container {
+        margin-left: 10px;
+    }
+
+    
+}
+
+.table-mat {
+    width: 100%;
+    border-collapse: collapse;
+
+    th.mat-header-cell,
+    td.mat-cell {
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .mat-row:last-child td.mat-cell {
+        border-bottom: none;
+    }
+
+    .truncate-cell {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
