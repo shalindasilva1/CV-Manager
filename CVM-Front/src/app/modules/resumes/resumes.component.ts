@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CvDto, CvsService, JobDtoListResult, JobsService } from 'src/app/Services/SWAGGER';
 import { TableColumn } from '../shared/mati-table/interfaces/TableColumn';
+import { MatDialog } from '@angular/material/dialog';
+import { ResumesAddComponent } from './resumes-add/resumes-add.component';
 
 @Component({
   selector: 'app-resumes',
@@ -19,7 +21,10 @@ export class ResumesComponent implements OnInit {
     { name: 'originalFileName', alias: 'File Name' },
     { name: 'action', alias: 'Actions' }
   ]
-  constructor(private cvsService: CvsService) { }
+  constructor(
+    private dialog: MatDialog,
+    private cvsService: CvsService
+    ) { }
 
   ngOnInit() {
     this.getAllCVs();
@@ -47,6 +52,18 @@ export class ResumesComponent implements OnInit {
     //   this.getAllJobs();
     // });
   }
+
+  openAddForm() {
+    const dialogRef = this.dialog.open(ResumesAddComponent, {
+      width: '500px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAllCVs();
+    });
+  }
+  
 
   async deleteEvent(cv: CvDto) {
     try {

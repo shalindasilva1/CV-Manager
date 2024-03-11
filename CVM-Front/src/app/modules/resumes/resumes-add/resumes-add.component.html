@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Add Job</h2>
+<mat-dialog-content>
+  <div *ngIf="!loading && !successMessage; else successMsg">
+    <form [formGroup]="addCVForm" class="job-form" *ngIf="!loading">
+      <!-- Existing form fields -->
+      <mat-form-field appearance="outline">
+        <mat-label>CV Name</mat-label>
+        <input matInput formControlName="fileName">
+      </mat-form-field>
+      <div class="input-row">
+        <mat-form-field>
+          <ngx-mat-file-input *ngIf="addCVForm.get('cvFile')" [formControl]="addCVForm.controls['cvFile']" [multiple]="false"
+            [color]="'primary'">
+            Choose a CV file
+          </ngx-mat-file-input>
+
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="spinner-container" *ngIf="loading">
+      <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+  <ng-template #successMsg>
+    <div class="success-message">
+      <mat-icon>check_circle</mat-icon>
+      {{ successMessage }}
+    </div>
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button *ngIf="!successMessage" mat-button cdkFocusInitial (click)="addCV()" color="primary">Save</button>
+</mat-dialog-actions>

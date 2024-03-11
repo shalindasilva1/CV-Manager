@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatiTableComponent } from './mati-table/mati-table.component';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 const materialModules = [
   MatToolbarModule,
@@ -37,7 +38,8 @@ const materialModules = [
   MatDialogModule,
   MatButtonModule,
   MatSelectModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  NgxMatFileInputModule
 ];
 
 @NgModule({
