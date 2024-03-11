@@ -16,8 +16,12 @@
   </div>
   <!-- Data table -->
 <app-mati-table [dataSource]="dataSource"
-  [displayedColumns]="['id', 'designation', 'description', 'salaryRatio', 'employment', 'location', 'action']"
-  [columnClasses]="{'description': 'truncate-cell'}">
+  [displayedColumns]="displayedColumns"
+  [columnClasses]="{'description': 'truncate-cell'}" 
+  [actionButtons]="{
+    'Edit': { tooltip: 'Edit Job', click: updateEvent, icon: 'edit' },
+    'Delete': { tooltip: 'Delete Job', click: deleteEvent, icon: 'delete' }
+  }">
 </app-mati-table>
 
 </div>

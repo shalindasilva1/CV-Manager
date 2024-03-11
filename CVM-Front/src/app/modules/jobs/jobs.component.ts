@@ -24,9 +24,12 @@ export class JobsComponent implements OnInit {
   jobs: JobDtoListResult | undefined;
 
   constructor(
-    public dialog: MatDialog,
-    private jobsService: JobsService
-  ) { }
+    private dialog: MatDialog,
+    private jobsService: JobsService,
+  ) { 
+    this.updateEvent = this.updateEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
+  }
 
   ngOnInit() {
     this.getAllJobs();
@@ -71,8 +74,9 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  async deleteEvent(jobId: number) {
+  async deleteEvent(job: JobDto) {
     try {
+      var jobId = job.id!;
       await this.jobsService.apiJobsIdDelete(jobId).toPromise();
 
       this.dataSource.data = this.dataSource.data.filter(job => job.id !== jobId);
