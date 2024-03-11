@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { JobDto, JobDtoListResult, JobsService } from 'src/app/Services/SWAGGER';
 import { JobAddComponent } from './job-add/job-add.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { TableColumn } from '../shared/mati-table/interfaces/TableColumn';
 
 @Component({
   selector: 'app-jobs',
@@ -20,7 +21,16 @@ import { MatTableDataSource } from '@angular/material/table';
 export class JobsComponent implements OnInit {
 
   dataSource!: MatTableDataSource<JobDto>;
-  displayedColumns: string[] = ['designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
+  //displayedColumns: string[] = ['designation', 'description', 'salaryRatio', 'employment', 'location', 'action'];
+  displayedColumns: TableColumn[] = [
+    { name: 'id', alias: 'ID' },
+    { name: 'designation', alias: 'Designation' },
+    { name: 'description', alias: 'Description', class: 'truncate-cell' },
+    { name: 'salaryRatio', alias: 'Salary Ratio' },
+    { name: 'employment', alias: 'Employment Type' },
+    { name: 'location', alias: 'Location' },
+    { name: 'action', alias: 'Actions' }
+  ]
   jobs: JobDtoListResult | undefined;
 
   constructor(

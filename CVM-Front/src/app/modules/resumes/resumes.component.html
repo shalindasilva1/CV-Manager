@@ -15,5 +15,10 @@
     </div>
   </div>
   <!-- Data table -->
-
+  <app-mati-table [dataSource]="dataSource" [displayedColumns]="displayedColumns"
+    [columnClasses]="{'description': 'truncate-cell'}" [actionButtons]="{
+      'Edit': { tooltip: 'Edit Job', click: updateEvent, icon: 'edit' },
+      'Delete': { tooltip: 'Delete Job', click: deleteEvent, icon: 'delete' }
+    }">
+  </app-mati-table>
 </div>
