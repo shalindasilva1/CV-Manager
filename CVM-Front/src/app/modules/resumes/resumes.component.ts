@@ -24,12 +24,20 @@ export class ResumesComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private cvsService: CvsService
-    ) { }
+    ) {
+    this.updateEvent = this.updateEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
+     }
 
   ngOnInit() {
     this.getAllCVs();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   async getAllCVs() {
     try {
       const data = await this.cvsService.apiCvsGet().toPromise();
@@ -63,7 +71,6 @@ export class ResumesComponent implements OnInit {
       this.getAllCVs();
     });
   }
-  
 
   async deleteEvent(cv: CvDto) {
     try {

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobDto, JobsService, Location, NatureOfEmployment } from 'src/app/Services/SWAGGER';
 import { UserManagementService } from 'src/app/Services/user-management/user-management.service';
@@ -11,7 +11,14 @@ import { UserManagementService } from 'src/app/Services/user-management/user-man
 })
 export class JobAddComponent implements OnInit {
   public enumKeys: string[] = [];
-  public addJobForm: any;
+  public addJobForm = new FormGroup({
+    designation: new FormControl('', Validators.required),
+    description: new FormControl(''),
+    startSalary: new FormControl(0),
+    endSalary: new FormControl(0),
+    natureOfEmployment: new FormControl(NatureOfEmployment.FullTime),
+    location: new FormControl(Location.Onsite)
+  });
   public employmentTypes: NatureOfEmployment[] = Object.values(NatureOfEmployment);
   public locations: Location[] = Object.values(Location);
   public loginUser: any;
@@ -19,23 +26,12 @@ export class JobAddComponent implements OnInit {
   public successMessage: string | null = null;
 
   constructor(
-    private dialogRef: MatDialogRef<JobAddComponent>,
     private jobsService: JobsService,
-    private formBuilder: UntypedFormBuilder,
     private userManagementService: UserManagementService,
     @Inject(MAT_DIALOG_DATA) public data: { jobData: JobDto }
   ) {}
 
   ngOnInit() {
-    this.addJobForm = this.formBuilder.group({
-      designation: '',
-      description: '',
-      startSalary: 0,
-      endSalary: 0,
-      natureOfEmployment: NatureOfEmployment,
-      location: Location
-    });
-
     if (this.data && this.data.jobData) {
       const job = this.data.jobData;
       this.addJobForm.patchValue({
@@ -55,12 +51,12 @@ export class JobAddComponent implements OnInit {
       this.loading = true; 
 
       const jobDto: JobDto = {
-        designation: this.addJobForm.get('designation').value,
-        description: this.addJobForm.get('description').value,
-        startSalary: this.addJobForm.get('startSalary').value,
-        endSalary: this.addJobForm.get('endSalary').value,
-        employment: this.addJobForm.get('natureOfEmployment').value,
-        location: this.addJobForm.get('location').value,
+        designation: this.addJobForm.controls.designation.value,
+        description: this.addJobForm.controls.description.value,
+        startSalary: this.addJobForm.controls.startSalary.value ?? undefined,
+        endSalary: this.addJobForm.controls.endSalary.value ?? undefined,
+        employment: this.addJobForm.controls.natureOfEmployment.value ?? NatureOfEmployment.FullTime,
+        location: this.addJobForm.controls.location.value ?? Location.Onsite,
         createdBy: this.loginUser.id
       };
       if(this.data && this.data.jobData && this.data.jobData.id){

@@ -1,0 +1,29 @@
+.job-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-row {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+    margin-right: 10px;
+    /* Adjust as needed */
+}
+
+/* Add this CSS to your component's stylesheet */
+
+.success-message {
+    display: flex;
+    /* Use flexbox layout */
+    align-items: center;
+    /* Align items vertically */
+}
+
+.success-message mat-icon {
+    color: var(--primary);
+    margin-right: 8px;
+    /* Add spacing between icon and text */
+}

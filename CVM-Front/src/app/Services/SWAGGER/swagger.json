@@ -226,42 +226,6 @@
                         }
                     },
                     {
-                        "name": "ContentType",
-                        "in": "query",
-                        "style": "form",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "Metadata",
-                        "in": "query",
-                        "style": "form",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "Categories",
-                        "in": "query",
-                        "style": "form",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/components/schemas/Category"
-                            }
-                        }
-                    },
-                    {
-                        "name": "UploadedDate",
-                        "in": "query",
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    {
                         "name": "OriginalFileName",
                         "in": "query",
                         "style": "form",
@@ -270,15 +234,7 @@
                         }
                     },
                     {
-                        "name": "DownloadUrl",
-                        "in": "query",
-                        "style": "form",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "TextContent",
+                        "name": "ContentType",
                         "in": "query",
                         "style": "form",
                         "schema": {
