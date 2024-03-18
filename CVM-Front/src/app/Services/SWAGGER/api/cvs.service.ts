@@ -19,8 +19,6 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { Category } from '../model/category';
-// @ts-ignore
 import { CvDtoListResult } from '../model/cvDtoListResult';
 // @ts-ignore
 import { CvDtoResult } from '../model/cvDtoResult';
@@ -319,14 +317,9 @@ export class CvsService {
 
     /**
      * @param id 
-     * @param fileName 
-     * @param contentType 
-     * @param metadata 
-     * @param categories 
-     * @param uploadedDate 
+     * @param candidateName 
      * @param originalFileName 
-     * @param downloadUrl 
-     * @param textContent 
+     * @param contentType 
      * @param createdAt 
      * @param updatedAt 
      * @param createdBy 
@@ -336,48 +329,26 @@ export class CvsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCvsIdPut(id: number, fileName?: string, contentType?: string, metadata?: string, categories?: Array<Category>, uploadedDate?: string, originalFileName?: string, downloadUrl?: string, textContent?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiCvsIdPut(id: number, fileName?: string, contentType?: string, metadata?: string, categories?: Array<Category>, uploadedDate?: string, originalFileName?: string, downloadUrl?: string, textContent?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiCvsIdPut(id: number, fileName?: string, contentType?: string, metadata?: string, categories?: Array<Category>, uploadedDate?: string, originalFileName?: string, downloadUrl?: string, textContent?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiCvsIdPut(id: number, fileName?: string, contentType?: string, metadata?: string, categories?: Array<Category>, uploadedDate?: string, originalFileName?: string, downloadUrl?: string, textContent?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public apiCvsIdPut(id: number, candidateName?: string, originalFileName?: string, contentType?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiCvsIdPut(id: number, candidateName?: string, originalFileName?: string, contentType?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiCvsIdPut(id: number, candidateName?: string, originalFileName?: string, contentType?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiCvsIdPut(id: number, candidateName?: string, originalFileName?: string, contentType?: string, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiCvsIdPut.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (fileName !== undefined && fileName !== null) {
+        if (candidateName !== undefined && candidateName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>fileName, 'FileName');
-        }
-        if (contentType !== undefined && contentType !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>contentType, 'ContentType');
-        }
-        if (metadata !== undefined && metadata !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>metadata, 'Metadata');
-        }
-        if (categories) {
-            categories.forEach((element) => {
-                localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-                  <any>element, 'Categories');
-            })
-        }
-        if (uploadedDate !== undefined && uploadedDate !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>uploadedDate, 'UploadedDate');
+            <any>candidateName, 'CandidateName');
         }
         if (originalFileName !== undefined && originalFileName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>originalFileName, 'OriginalFileName');
         }
-        if (downloadUrl !== undefined && downloadUrl !== null) {
+        if (contentType !== undefined && contentType !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>downloadUrl, 'DownloadUrl');
-        }
-        if (textContent !== undefined && textContent !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>textContent, 'TextContent');
+            <any>contentType, 'ContentType');
         }
         if (createdAt !== undefined && createdAt !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -481,7 +452,7 @@ export class CvsService {
     }
 
     /**
-     * @param fileName 
+     * @param candidateName 
      * @param originalFileName 
      * @param contentType 
      * @param id 
@@ -494,15 +465,15 @@ export class CvsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCvsPost(fileName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<CvDtoResult>;
-    public apiCvsPost(fileName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CvDtoResult>>;
-    public apiCvsPost(fileName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CvDtoResult>>;
-    public apiCvsPost(fileName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public apiCvsPost(candidateName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<CvDtoResult>;
+    public apiCvsPost(candidateName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CvDtoResult>>;
+    public apiCvsPost(candidateName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CvDtoResult>>;
+    public apiCvsPost(candidateName?: string, originalFileName?: string, contentType?: string, id?: number, createdAt?: string, updatedAt?: string, createdBy?: string, modifiedBy?: string, tenantId?: number, cvFile?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (fileName !== undefined && fileName !== null) {
+        if (candidateName !== undefined && candidateName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>fileName, 'FileName');
+            <any>candidateName, 'CandidateName');
         }
         if (originalFileName !== undefined && originalFileName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

@@ -16,9 +16,10 @@ export class ResumesComponent implements OnInit {
   //displayedColumns: string[] = ['fileName','action'];
   displayedColumns: TableColumn[] = [
     { name: 'id', alias: 'ID' },
-    { name: 'fileName', alias: 'CV Name' },
-    { name: 'contentType', alias: 'Content Type' },
-    { name: 'originalFileName', alias: 'File Name' },
+    { name: 'candidateName', alias: 'Candidate Name' },
+    // { name: 'contentType', alias: 'Content Type' },
+    //{ name: 'originalFileName', alias: 'File Name' },
+    { name: 'originalFileName', alias: 'Categories' },
     { name: 'action', alias: 'Actions' }
   ]
   constructor(
@@ -51,14 +52,14 @@ export class ResumesComponent implements OnInit {
   }
 
   updateEvent(cv: CvDto) {
-    // const dialogRef = this.dialog.open(JobAddComponent, {
-    //   width: '500px',
-    //   data: { jobData: job }
-    // });
+    const dialogRef = this.dialog.open(ResumesAddComponent, {
+      width: '500px',
+      data: { cvData: cv }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.getAllJobs();
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAllCVs();
+    });
   }
 
   openAddForm() {

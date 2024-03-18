@@ -49,25 +49,26 @@ export class JobAddComponent implements OnInit {
   async addJob() {
     try {
       this.loading = true; 
-
-      const jobDto: JobDto = {
-        designation: this.addJobForm.controls.designation.value,
-        description: this.addJobForm.controls.description.value,
-        startSalary: this.addJobForm.controls.startSalary.value ?? undefined,
-        endSalary: this.addJobForm.controls.endSalary.value ?? undefined,
-        employment: this.addJobForm.controls.natureOfEmployment.value ?? NatureOfEmployment.FullTime,
-        location: this.addJobForm.controls.location.value ?? Location.Onsite,
-        createdBy: this.loginUser.id
-      };
-      if(this.data && this.data.jobData && this.data.jobData.id){
-        jobDto.id = this.data.jobData.id;
-        const result = await this.jobsService.apiJobsIdPut(this.data.jobData.id, jobDto).toPromise();
-        this.successMessage = 'Job updated successfully!';
-        console.log('Job updated successfully:', result);
-      }else{
-        const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
-        this.successMessage = 'New Job added successfully!';
-        console.log('Job added successfully:', result);
+      if(this.addJobForm.valid){
+        const jobDto: JobDto = {
+          designation: this.addJobForm.controls.designation.value,
+          description: this.addJobForm.controls.description.value,
+          startSalary: this.addJobForm.controls.startSalary.value ?? undefined,
+          endSalary: this.addJobForm.controls.endSalary.value ?? undefined,
+          employment: this.addJobForm.controls.natureOfEmployment.value ?? NatureOfEmployment.FullTime,
+          location: this.addJobForm.controls.location.value ?? Location.Onsite,
+          createdBy: this.loginUser.id
+        };
+        if(this.data && this.data.jobData && this.data.jobData.id){
+          jobDto.id = this.data.jobData.id;
+          const result = await this.jobsService.apiJobsIdPut(this.data.jobData.id, jobDto).toPromise();
+          this.successMessage = 'Job updated successfully!';
+          console.log('Job updated successfully:', result);
+        }else{
+          const result = await this.jobsService.apiJobsPost(jobDto).toPromise();
+          this.successMessage = 'New Job added successfully!';
+          console.log('Job added successfully:', result);
+        }
       }
       
     } catch (error) {

@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Category } from './category';
 
 
 export interface CvDto { 
@@ -19,10 +18,9 @@ export interface CvDto {
     createdBy?: string | null;
     modifiedBy?: string | null;
     tenantId?: number;
-    fileName?: string | null;
+    candidateName?: string | null;
     contentType?: string | null;
     metadata?: string | null;
-    categories?: Array<Category> | null;
     uploadedDate?: string;
     originalFileName?: string | null;
     downloadUrl?: string | null;
